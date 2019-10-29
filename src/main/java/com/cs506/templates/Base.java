@@ -24,14 +24,12 @@ public class Base extends WebPage {
 	public static final String CONTENT_ID = "contentComponent";
 
 	private Component headerPanel;
-	private Component menuPanel;
 	private Component footerPanel;
  
     public Base(){
 		headerPanel = new HeaderPanel("headerPanel");
 		footerPanel = new FooterPanel("footerPanel");
 		add(headerPanel);
-		add(menuPanel);
 		add(footerPanel);
 		//add(new Label(CONTENT_ID, "Put your content here"));
 	}

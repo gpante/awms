@@ -11,7 +11,7 @@ public class HomePage extends Base {
 	public HomePage(final PageParameters parameters) {
 		super();
 
-		add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
+		//add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
 
 		// TODO Add your page's components here
 
