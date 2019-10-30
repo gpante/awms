@@ -1,6 +1,7 @@
 package com.cs506;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import com.cs506.templates.SignInPanel;
 
 public final class SignIn extends DefaultPage {
 

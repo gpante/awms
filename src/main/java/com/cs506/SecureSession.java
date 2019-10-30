@@ -31,15 +31,19 @@ public final class SecureSession extends AuthenticatedWebSession
     @Override
     public final boolean authenticate(final String username, final String password)
     {
-    	User user = null;
-    	// TODO load user info from db
     	
-    	if (user != null) {
-    		setUser(user);
-    		return true;
-    	} else {
-    		return false;
-    	}
+    	//temp login
+    	return username.equals(password) && username.equals("test");
+    	
+//    	User user = null;
+//    	// TODO load user info from db
+//    	
+//    	if (user != null) {
+//    		setUser(user);
+//    		return true;
+//    	} else {
+//    		return false;
+//    	}
     }
 
     public User getUser()

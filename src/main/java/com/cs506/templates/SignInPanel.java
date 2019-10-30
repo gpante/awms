@@ -1,4 +1,4 @@
-package com.cs506;
+package com.cs506.templates;
 
 import org.apache.wicket.authentication.IAuthenticationStrategy;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -7,6 +7,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+
+import com.cs506.AuthenticatedWebSession;
 
 public final class SignInPanel extends Panel {
 

@@ -1,7 +1,9 @@
 package com.cs506;
 
+
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+
 
 /**
  * Application object for your web application.
@@ -30,4 +32,19 @@ public class WicketApplication extends WebApplication
 
 		// add your configuration here
 	}
+	
+	
+	
+	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() 
+	{		
+		return SecureSession.class;
+	}
+
+	
+	
+	protected Class<? extends WebPage> getSignInPageClass() 
+	{
+		return SignIn.class;
+	}
+	
 }
