@@ -16,6 +16,8 @@
  */
 package com.cs506;
 
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
+import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 
 
@@ -62,4 +64,10 @@ public final class SecureSession extends AuthenticatedWebSession
         super.invalidate();
         user = null;
     }
+
+	@Override
+	public Roles getRoles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -3,6 +3,8 @@ package com.cs506;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 
 
 /**
@@ -11,7 +13,7 @@ import org.apache.wicket.protocol.http.WebApplication;
  * 
  * @see com.cs506.Start#main(String[])
  */
-public class WicketApplication extends WebApplication
+public class WicketApplication extends AuthenticatedWebApplication
 {
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
