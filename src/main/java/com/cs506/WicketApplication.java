@@ -1,10 +1,15 @@
 package com.cs506;
 
 
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.Session;
+import org.apache.wicket.authorization.IAuthorizationStrategy;
+import org.apache.wicket.authorization.strategies.page.SimplePageAuthorizationStrategy;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.settings.RequestCycleSettings;
+
+import com.cs506.templates.AuthenticatedBase;
 
 
 /**
@@ -31,8 +36,23 @@ public class WicketApplication extends AuthenticatedWebApplication
 	public void init()
 	{
 		super.init();
+		
+		getResourceSettings().setThrowExceptionOnMissingResource(false);
+        getRequestCycleSettings().setRenderStrategy(RequestCycleSettings.RenderStrategy.REDIRECT_TO_RENDER);
 
-		// add your configuration here
+        // Install a simple page authorization strategy, that checks all pages
+        // of type AuthenticatedBase.
+        IAuthorizationStrategy authorizationStrategy = new SimplePageAuthorizationStrategy(
+            AuthenticatedBase.class, getSignInPageClass())
+        {
+            @Override
+            protected boolean isAuthorized()
+            {
+                // check whether the user is logged on
+                return (((SecureSession)Session.get()).isSignedIn());
+            }
+        };
+        getSecuritySettings().setAuthorizationStrategy(authorizationStrategy);
 	}
 	
 	
