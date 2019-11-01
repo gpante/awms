@@ -10,10 +10,6 @@ import com.cs506.templates.WorkshopRequestPanel;
  */
 public class WorkshopRequestPage extends Base {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	public WorkshopRequestPage() {
 		add(new WorkshopRequestPanel("workshopRequestPanel"));
