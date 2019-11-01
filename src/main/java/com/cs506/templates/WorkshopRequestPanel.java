@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 /**
  * Panel for a workshop request.
- * TODO make the HTML file.
+ * 
  * @author AJ
  */
 public class WorkshopRequestPanel extends Panel {
