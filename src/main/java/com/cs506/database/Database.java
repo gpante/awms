@@ -2,7 +2,6 @@ package com.cs506.database;
 
 import java.sql.*;
 import com.cs506.workshop.WorkshopRequest;
-import java.util.Date;
 import java.util.LinkedList;
 
 public class Database {
@@ -14,13 +13,11 @@ public class Database {
         this.db = DriverManager.getConnection("jdbc:sqlite:database.db");
         Statement statement = db.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS account ("
-                          + "account_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                          + "username TEXT NOT NULL UNIQUE, "
+                          + "username TEXT PRIMARY KEY, "
                           + "password TEXT NOT NULL, "
                           + "permission_lvl INTEGER DEFAULT 0)");
         statement.execute("CREATE TABLE IF NOT EXISTS workshop ("
-                          + "workshop_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                          + "name TEXT NOT NULL UNIQIE, "
+                          + "name TEXT NOT NULL UNIQUE, "
                           + "workshop_type_name TEXT, "
                           + "workshop_type INT, "
                           + "group_name TEXT NOT NULL, "
@@ -40,15 +37,15 @@ public class Database {
                           + "how_you_heard TEXT, "
                           + "special TEXT)");
         statement.execute("CREATE TABLE IF NOT EXISTS signed_up ("
-                          + "account_id INTEGER, "
-                          + "workshop_id INTEGER, "
-                          + "PRIMARY KEY (account_id, workshop_id), "
-                          + "FOREIGN KEY (account_id) "
-                          + "REFERENCES account (account_id) "
+                          + "username TEXT, "
+                          + "name TEXT, "
+                          + "PRIMARY KEY (username, name), "
+                          + "FOREIGN KEY (username) "
+                          + "REFERENCES account (username) "
                           + "ON DELETE CASCADE "
                           + "ON UPDATE CASCADE, "
-                          + "FOREIGN KEY (workshop_id) "
-                          + "REFERENCES workshop (workshop_id) "
+                          + "FOREIGN KEY (name) "
+                          + "REFERENCES workshop (name) "
                           + "ON DELETE CASCADE "
                           + "ON UPDATE CASCADE)");
     } catch (SQLException e) {
