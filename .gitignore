@@ -1,1 +1,13 @@
 /target/
+*.prefs
+.settings/.jsdtscope
+*.component
+.settings/org.eclipse.wst.common.project.facet.core.xml
+*.container
+*.name
+*.class
+bin/README.md
+bin/pom.xml
+.classpath
+.project
+bin
