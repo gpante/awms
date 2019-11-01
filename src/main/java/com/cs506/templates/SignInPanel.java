@@ -56,7 +56,7 @@ public final class SignInPanel extends Panel {
 		super.onConfigure();
 	}
 
-	public class SignInForm extends StatelessForm<SignInPanel> {
+	public final class SignInForm extends StatelessForm<SignInPanel> {
 
 		public SignInForm(final String id) {
 			super(id);
@@ -68,15 +68,16 @@ public final class SignInPanel extends Panel {
 
 		@Override
 		public final void onSubmit() {
-			IAuthenticationStrategy strategy = getApplication().getSecuritySettings()
-				.getAuthenticationStrategy();
+			IAuthenticationStrategy strategy = getApplication().getSecuritySettings().getAuthenticationStrategy();
 
 			if (session.signIn(getUsername(), getPassword())) {
 				strategy.remove();
 				// redirect to homepage
 				setResponsePage(getApplication().getHomePage());
-			} else // TODO display error or something
+			} else {
+				error(getLocalizer().getString("signInFailed", this, "Invalid username or password"));
 				strategy.remove();
+			}
 		}
 	}
 }

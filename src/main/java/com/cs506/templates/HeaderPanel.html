@@ -9,18 +9,20 @@
 </head>
 <body>
    <wicket:panel>
-      <table width="100%" style="border: 2px none;">
-          <tbody>
-            <tr>
-              <td>
-                <img alt="UW Crest" src="..\..\..\..\resources\crest.png" style="width:128px;height:128px;">
-              </td>
-              <td>
-                <h1>Adventure Learning Programs</h1>
-              </td>
-             </tr>
-          </tbody>
-      </table>
+    <div class="header default">
+        <div class="l-container">
+            <div class="logo">
+                <a href="HomePage.html" target="_top"><img wicket:id="headerimage" alt="Adventure Learning Programs" /></a>
+            </div>
+			<div class="text-right">
+	       	<wicket:link><a href="HomePage.html">Home</a></wicket:link>&#160;
+	       	<wicket:link><a wicket:id = "signInButton"><span wicket:id = "signInText"></span></a></wicket:link>&#160;
+            </div>
+			<div>
+			  <wicket:child/>
+			</div>
+		</div>
+    </div>
    </wicket:panel>
 </body>
 </html>

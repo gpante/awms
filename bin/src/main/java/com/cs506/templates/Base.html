@@ -28,22 +28,17 @@
 </wicket:link> 
 -->
 </head>
-<body>
-	<div id="header" wicket:id="headerPanel">
-	</div>
-	<main>
-	<p>
-       <br />
-		<div class="l-container">
-			<div class="text-right">
-            </div>
-			<div>
-			  <wicket:child/>
-			</div>
+<body style="background-color:powderblue;">
+	<div id="header" wicket:id="headerPanel">header</div>
+	<div id="body" style="width:100%;">
+		<div id="content">
+			<wicket:child/>
 		</div>
-		</p>
-	</main>
-	<div id="footer" wicket:id="footerPanel">
 	</div>
+	<footer>
+		<br>
+		<br>
+		<div id="footer" wicket:id="footerPanel">footer</div>
+	</footer>
 </body>
 </html>

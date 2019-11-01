@@ -11,7 +11,7 @@ public final class SignIn extends Base {
 	}
 
 	public SignIn(PageParameters pageParameters) {
-        super();
+        super(pageParameters);
         add(new SignInPanel("signInPanel"));
 	}
 

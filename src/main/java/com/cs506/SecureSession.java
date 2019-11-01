@@ -25,17 +25,20 @@ public final class SecureSession extends AuthenticatedWebSession
 {
     private User user;
 
-    protected SecureSession(Request request)
+    public SecureSession(Request request)
     {
         super(request);
     }
 
     @Override
-    public final boolean authenticate(final String username, final String password)
-    {
+    public final boolean authenticate(final String username, final String password) {
     	
     	//temp login
-    	return username.equals(password) && username.equals("test");
+    	if (username.equals(password) && username.equals("test")) {
+    		setUser(new User(username));
+    		return true;
+    	} else
+    		return false;
     	
 //    	User user = null;
 //    	// TODO load user info from db
@@ -48,19 +51,16 @@ public final class SecureSession extends AuthenticatedWebSession
 //    	}
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(final User user)
-    {
+    public void setUser(final User user) {
         this.user = user;
     }
 
     @Override
-    public void invalidate()
-    {
+    public void invalidate() {
         super.invalidate();
         user = null;
     }

@@ -17,21 +17,29 @@
 package com.cs506.templates;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.CssResourceReference;
 
 public class Base extends WebPage {
-	public static final String CONTENT_ID = "contentComponent";
 
 	private Component headerPanel;
 	private Component footerPanel;
+	
+	public Base() {
+		this(new PageParameters());
+	}
  
-    public Base(){
+    public Base(final PageParameters pageParameters){
+    	super(pageParameters);
+    	
 		headerPanel = new HeaderPanel("headerPanel");
 		footerPanel = new FooterPanel("footerPanel");
 		add(headerPanel);
 		add(footerPanel);
-		//add(new Label(CONTENT_ID, "Put your content here"));
 	}
     //getters for layout areas
 	protected Component getHeaderPanel() {
@@ -40,5 +48,11 @@ public class Base extends WebPage {
 
 	protected Component getFooterPanel() {
 		return footerPanel;
+	}
+	
+	@Override
+	public void renderHead(IHeaderResponse response)
+	{
+		response.render(CssHeaderItem.forReference(new CssResourceReference(Base.class, "style.css"),"screen"));
 	}
 }
