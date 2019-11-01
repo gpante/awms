@@ -3,6 +3,7 @@ package com.cs506.database;
 import java.sql.*;
 import com.cs506.workshop.WorkshopRequest;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class Database {
   
@@ -19,6 +20,7 @@ public class Database {
                           + "permission_lvl INTEGER DEFAULT 0)");
         statement.execute("CREATE TABLE IF NOT EXISTS workshop ("
                           + "workshop_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                          + "name TEXT NOT NULL UNIQIE, "
                           + "workshop_type_name TEXT, "
                           + "workshop_type INT, "
                           + "group_name TEXT NOT NULL, "
@@ -54,7 +56,7 @@ public class Database {
     }
   }
   
-  public void addWorkshop(WorkshopRequest request) {
+  public void addWorkshop(WorkshopRequest request, String name) {
     
     String date = request.getDate().toString();
     String start = request.getStartTime().toString();
@@ -79,12 +81,12 @@ public class Database {
       consist75 = 1;
     }
     
-    String sql = String.format("INSERT INTO account (" 
+    String sql = String.format("INSERT INTO workshop (name, "
                   + "group_name, contact_name, contact_phone, "
                   + "contact_email, location, consist_75, date, start, end, "
                   + "alternate_date, alternate_start, alternate_end, participants, "
                   + "areas, how_you_heard, special) "
-                  + "VALUES ("
+                  + "VALUES ('" + name + "', "
                   + "'%1$s', '%2$s', '%3$s', "
                   + "'%4$s', '%5$s', %6$d, '%7$s', '%8$s', '%9$s', "
                   + "'%10$s', '%11$s', '%12$s', %13$d, "
@@ -100,4 +102,69 @@ public class Database {
       System.out.println(e.getMessage());
     }
   }
+  
+  public LinkedList<String[]> getWorkshop(String name) {
+    
+    LinkedList<String[]> list = new LinkedList<String[]>();
+    
+    String sql = ("SELECT * FROM workshop WHERE name = '" + name + "'");
+    ResultSet result = null;
+        
+    try {
+      Statement statement = db.createStatement();
+      result = statement.executeQuery(sql);
+     
+      while (result.next()) {
+        String[] array = {result.getString("name"), result.getString("group_name"), 
+            result.getString("contact_name"), result.getString("contact_phone"), result.getString("contact_email"),
+            result.getString("location"), result.getString("consist_75"), result.getString("date"),
+            result.getString("start"), result.getString("end"), result.getString("alternate_date"),
+            result.getString("alternate_start"), result.getString("alternate_end"), result.getString("participants"),
+            result.getString("areas"), result.getString("how_you_heard"), result.getString("special")};
+            list.add(array);
+    }
+      
+      
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return list;
+  }
+  
+  public void addUser(String username, String password, int permission) {
+    
+    String sql = ("INSERT INTO account VALUES ('" + username + "', '" + password + "', '" + permission + "')");
+    
+    try {
+      Statement statement = db.createStatement();
+      statement.execute(sql);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  
+ public LinkedList<String[]> getUser(String username, String password) {
+   
+   LinkedList<String[]> list = new LinkedList<String[]>();
+   
+   String sql = ("SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'");
+   ResultSet result = null;
+   
+   try {
+     Statement statement = db.createStatement();
+     result = statement.executeQuery(sql);
+    
+     while (result.next()) {
+       String[] array = {result.getString("username"), result.getString("password"), 
+           result.getString("permission_lvl")};
+           list.add(array);
+     }
+     
+     
+   } catch (SQLException e) {
+     System.out.println(e.getMessage());
+   }
+  return list;
+   
+ }
 }
