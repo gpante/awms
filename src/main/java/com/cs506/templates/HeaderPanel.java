@@ -17,12 +17,9 @@
 package com.cs506.templates;
 
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.request.resource.PackageResourceReference;
 
-import com.cs506.HomePage;
 import com.cs506.SecureSession;
 import com.cs506.SignIn;
 import com.cs506.SignOut;
@@ -35,8 +32,8 @@ public class HeaderPanel extends Panel {
 
 		setRenderBodyOnly(true);
 		
-		add(new Image("headerimage", new PackageResourceReference(
-			HomePage.class, "crest.png")));
+		/*add(new Image("headerimage", new PackageResourceReference(
+			HomePage.class, "crest.png")));*/
 		if (((SecureSession)getSession()).getUser() != null && !this.getClass().equals(SignOut.class)) {
 			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("signInButton", SignOut.class);
 			signInLink.add(new Label("signInText", "Sign Out"));

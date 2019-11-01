@@ -1,6 +1,6 @@
 package com.cs506;
 
-import com.cs506.templates.AuthenticatedBase;
+import com.cs506.templates.Base;
 import com.cs506.templates.WorkshopRequestPanel;
 
 /**
@@ -8,7 +8,7 @@ import com.cs506.templates.WorkshopRequestPanel;
  * TODO make the HTML file.
  * @author AJ
  */
-public class WorkshopRequestPage extends AuthenticatedBase {
+public class WorkshopRequestPage extends Base {
 
 	public WorkshopRequestPage() {
 		add(new WorkshopRequestPanel("workshopRequestPanel"));
