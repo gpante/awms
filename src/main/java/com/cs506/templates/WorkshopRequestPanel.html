@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>Adventure Learning Programs</title>
+	</head>
+	<body>
+		<wicket:panel>
+			<div wicket:id="feedback"></div>
+			<div id="workshopR"><form wicket:id="workshopRequestForm">
+				<table width="60%" cellspacing="50" style="font-size:150%">  
+			      <tr>
+			        <td>Name of group:</td>
+			        <td wicket:id = "nameOfGroupFeedback">
+			          <input class="ltextbox" wicket:id = "nameOfGroup" type="text" value="" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>Name of contact:</td>
+			        <td wicket:id = "nameOfContactFeedback">
+			          <input class="ltextbox" wicket:id = "nameOfContact" type="text" value="" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td valign="top">Does your group consist of 75% or more UW-Madison students?</td>
+			        <td valign="top">
+			            <wicket:container valign="top" wicket:id="consist75">
+			            	<label><input wicket:id="true" type="radio" name="ticker"/>Yes</label>
+			            	<label><input wicket:id="false" type="radio" name="ticker"/>No</label>
+			            </wicket:container>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>Contact email address:</td>
+			        <td wicket:id = "contactEmailFeedback">
+			          <input class="ltextbox" wicket:id = "contactEmail" type="email" size="50"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>Contact phone number:</td>
+			        <td wicket:id = "contactPhoneFeedback">
+			          <input class="ltextbox" wicket:id = "contactPhone" type="text" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td valign="top">What type of workshop are you interested in? Descriptions of our workshops can be found on our website.</td>
+			        <td valign="top">
+			            <wicket:container valign="top" wicket:id="workshopType">
+			            	<label><input wicket:id="high" type="radio" name="ticker"/>High Ropes Course (Open April 1st-November 1st)</label>
+			            	<br/>
+			            	<br/>
+			            	<label><input wicket:id="low" type="radio" name="ticker"/>Low Ropes Course (Open April 1st-November 1st)</label>
+			            	<br/>
+			            	<br/>
+			            	<label><input wicket:id="ground" type="radio" name="ticker"/>Ground/Teambuilding Workshop</label>
+			            	<br/>
+			            	<br/>
+			            	<label><input wicket:id="unsure" type="radio" name="ticker"/>Unsure</label>
+			            	<br/>
+			            	<br/>
+			            </wicket:container>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>If you are requesting a ground workshop, your group will be responsible for reserving a location on campus. If you already have a space reserved, please provide the location here.</td>
+			        <td wicket:id = "locationFeedback">
+			          <input class="ltextbox" wicket:id = "location" type="text" value="" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>Requested date of workshop:</td>
+			        <td wicket:id = "dateFeedback">
+			          <input class="ltextbox" wicket:id = "date" type="text" value="mm/dd/yyyy" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>What is your preferred start time?</td>
+			        <td wicket:id = "startTimeFeedback">
+            			<span class="ltextbox" wicket:id="startTime"></span>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>What is your preferred end time?</td>
+			        <td wicket:id = "endTimeFeedback">
+            			<span class="ltextbox" wicket:id="endTime"></span>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>Please provide an alternate date for your workshop:</td>
+			        <td wicket:id = "alternateDateFeedback">
+			          <input class="ltextbox" wicket:id = "alternateDate" type="text" value="" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>What is your preferred start time for the alternate date?</td>
+			        <td wicket:id = "alternateStartTimeFeedback">
+			          <span class="ltextbox" wicket:id = "alternateStartTime"></span>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>What is your preferred end time for the alternate date?</td>
+			        <td wicket:id = "alternateEndTimeFeedback">
+			          <span class="ltextbox" wicket:id = "alternateEndTime"></span>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>How many participants do you anticipate attending? (minimum of 5 for ground and roving workshops, minimum of 8 for low and high ropes workshops)</td>
+			        <td wicket:id = "participantsFeedback">
+			          <input class="ltextbox" wicket:id = "participants" type="number" size="5" maxlength="3"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>ALPs workshops have the potential to focus on the areas that follow. Please check all that you seek for your group.</td>
+			        	<span wicket:id="areasGroup">
+			        		<tr wicket:id="areas">
+								<td align="right"><input type="checkbox" class="lcheckbox" wicket:id="check"/></td>
+								<td><span wicket:id="name">area</span></td>
+				        	</tr>
+			        	</span>
+			      </tr>
+			      <tr>
+			        <td align="right">How did you hear about ALPs?</td>
+			        <td wicket:id = "howDidYouHearFeedback">
+			          <input class="ltextbox" wicket:id = "howDidYouHear" type="text" value="" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td align="right">Please list any special considerations (accessibility, personal needs of group members, etc.), special requests, or additional information we need to know.</td>
+			        <td wicket:id = "specialFeedback">
+			          <input class="ltextbox" wicket:id = "special" type="text" value="" size="30"/>
+			        </td>
+			      </tr>
+			      <tr>
+			        <td>
+			        </td>
+			        <td>
+			          <p>
+			          <br />
+			          <input type="submit" value="Submit Request"/>
+			          </p>
+			        </td>
+			      </tr>
+			    </table>
+			</form></div>
+		</wicket:panel>
+	</body>
+</html>
