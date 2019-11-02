@@ -15,5 +15,7 @@ public class AboutALPs extends Base {
 		// TODO Add your page's components here
 
 	}
+	
+	
 }
 
