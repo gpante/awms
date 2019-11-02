@@ -26,8 +26,8 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.DateValidator;
 import org.apache.wicket.validation.validator.StringValidator;
-
 import com.cs506.WorkshopRequestSubmitted;
+import com.cs506.database.Database;
 import com.cs506.validator.PhoneNumberValidator;
 import com.cs506.workshop.Area;
 import com.cs506.workshop.WorkshopRequest;
@@ -176,7 +176,17 @@ public class WorkshopRequestPanel extends Panel {
 		public final void onSubmit() {
 			WorkshopRequest request = getModelObject();
 			System.out.println(request);
-
+			
+			Database db = new Database();
+			System.out.println("connected");
+			try {	
+	    		db.addWorkshop(request, "test");
+	    		System.out.println("submitted");
+	    	}catch(Exception e) {
+	    		System.out.print(e);
+	    		System.out.println("error");
+	    	}
+			
 			setResponsePage(WorkshopRequestSubmitted.class);
 		}
 		
