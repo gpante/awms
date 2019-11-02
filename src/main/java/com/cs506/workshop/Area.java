@@ -21,9 +21,6 @@ public abstract class Area implements Serializable {
 		this.name = getName();
 	}
 	
-	/** Communication **/
-	public static final int AREA_COMMUNICATION = 0x1;
-	
 	public static final class Communication extends Area {
 
 		@Override
@@ -37,9 +34,6 @@ public abstract class Area implements Serializable {
 		}
 		
 	}
-	
-	/** Trust **/
-	public static final int AREA_TRUST = 0x2;
 	
 	public static final class Trust extends Area {
 
@@ -55,9 +49,6 @@ public abstract class Area implements Serializable {
 		
 	}
 	
-	/** Conflict Resolution **/
-	public static final int AREA_CONFLICT_RESOLUTION = 0x4;
-	
 	public static final class ConflictResolution extends Area {
 
 		@Override
@@ -71,9 +62,6 @@ public abstract class Area implements Serializable {
 		}
 		
 	}
-	
-	/** Problem Solving/Decision Making **/
-	public static final int AREA_PROBLEM_SOLVING = 0x8;
 	
 	public static final class ProblemSolving extends Area {
 
@@ -89,9 +77,6 @@ public abstract class Area implements Serializable {
 		
 	}
 	
-	/** Vision and Mission **/
-	public static final int AREA_VISION_AND_MISSION = 0x10;
-	
 	public static final class VisionAndMission extends Area {
 
 		@Override
@@ -105,9 +90,6 @@ public abstract class Area implements Serializable {
 		}
 		
 	}
-	
-	/** Goal Setting **/
-	public static final int AREA_GOAL_SETTING = 0x20;
 	
 	public static final class GoalSetting extends Area {
 
@@ -123,9 +105,6 @@ public abstract class Area implements Serializable {
 		
 	}
 	
-	/** Community Building **/
-	public static final int AREA_COMMUNITY_BUILDING = 0x40;
-	
 	public static final class CommunityBuilding extends Area {
 
 		@Override
@@ -139,9 +118,6 @@ public abstract class Area implements Serializable {
 		}
 		
 	}
-	
-	/** Resiliency **/
-	public static final int AREA_RESILIENCY = 0x80;
 	
 	public static final class Resiliency extends Area {
 
