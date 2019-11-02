@@ -20,58 +20,42 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
 
+import com.cs506.AboutALPs;
+import com.cs506.AboutWorkshops;
+import com.cs506.HomePage;
 import com.cs506.SecureSession;
 import com.cs506.SignIn;
 import com.cs506.SignOut;
+import com.cs506.WorkshopRequestPage;
 
 public class HeaderPanel extends Panel {
 
 	public HeaderPanel(String id) {
 		super(id);
 
-
 		setRenderBodyOnly(true);
 		
-		/*add(new Image("headerimage", new PackageResourceReference(
-			HomePage.class, "crest.png")));*/
 		if (((SecureSession)getSession()).getUser() != null && !this.getClass().equals(SignOut.class)) {
-			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("signInButton", SignOut.class);
-			signInLink.add(new Label("signInText", "Sign Out"));
-			add(signInLink);
-			
-			/*
-			final BookmarkablePageLink<Void> registerLink = new BookmarkablePageLink<>("reg", Register.class);
-			Label registerLabel = new Label("regtext", "Register");
-			registerLabel.setVisible(false);
-			registerLink.add(registerLabel);
-			add(registerLink);
-			*/
-			
-			/*
-			final BookmarkablePageLink<Void> accountLink = new BookmarkablePageLink<>("account", Account.class);
-			Label accountLabel = new Label("accounttext", "Account");
-			accountLink.add(accountLabel);
-			add(accountLink);
-			*/
+			final BookmarkablePageLink<Void> signOutLink = new BookmarkablePageLink<>("sign", SignOut.class);
+			signOutLink.add(new Label("signText", "Sign Out"));
+			add(signOutLink);
 		} else {
-			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("signInButton", SignIn.class);
-			signInLink.add(new Label("signInText", "Sign In"));
+			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("sign", SignIn.class);
+			signInLink.add(new Label("signText", "Sign In"));
 			add(signInLink);
-			
-			/*
-			final BookmarkablePageLink<Void> registerLabel = new BookmarkablePageLink<>("reg", Register.class);
-			registerLabel.add(new Label("regtext", "Register"));
-			add(registerLabel);
-			*/
-			
-			/*
-			final BookmarkablePageLink<Void> accountLink = new BookmarkablePageLink<>("account", Account.class);
-			Label accountLabel = new Label("accounttext", "Account");
-			accountLabel.setVisible(false);
-			accountLink.add(accountLabel);
-			add(accountLink);
-			*/
 		}
+		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
+		homeLink.add(new Label("homeText", "Home"));
+		add(homeLink);
+		final BookmarkablePageLink<Void> submitRequestLink = new BookmarkablePageLink<>("submitRequest", WorkshopRequestPage.class);
+		submitRequestLink.add(new Label("submitRequestText", "Request a Workshop"));
+		add(submitRequestLink);
+		final BookmarkablePageLink<Void> aboutALPs = new BookmarkablePageLink<>("aboutALPs", AboutALPs.class);
+		aboutALPs.add(new Label("aboutALPsText", "About ALPs"));
+		add(aboutALPs);
+		final BookmarkablePageLink<Void> aboutWorkshops = new BookmarkablePageLink<>("aboutWorkshops", AboutWorkshops.class);
+		aboutWorkshops.add(new Label("aboutWorkshopsText", "About Workshops"));
+		add(aboutWorkshops);
 	}
 }
 

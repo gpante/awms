@@ -1,5 +1,7 @@
 package com.cs506;
 
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+
 import com.cs506.templates.Base;
 import com.cs506.templates.WorkshopRequestPanel;
 
@@ -10,8 +12,8 @@ import com.cs506.templates.WorkshopRequestPanel;
  */
 public class WorkshopRequestPage extends Base {
 
-
-	public WorkshopRequestPage() {
+	public WorkshopRequestPage(final PageParameters pageParameters) {
+		super(pageParameters);
 		add(new WorkshopRequestPanel("workshopRequestPanel"));
 	}
 
