@@ -97,6 +97,12 @@
 			<version>${jetty9.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.wicket</groupId>
+		    <artifactId>wicket-extensions</artifactId>
+		    <version>9.0.0-M3</version>
+		</dependency>
+		
 		
 		<!-- Java JDBC driver -->
 		<dependency>

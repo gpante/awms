@@ -1672,3 +1672,12 @@ screen and (min-width:40em) {
 		max-width: 75rem
 	}
 }
+
+input.lcheckbox {
+	width: 20px;
+	height: 20px;
+}
+
+input.ltextbox {
+	height: 25px;
+}

@@ -1,12 +1,17 @@
 package com.cs506.workshop;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.apache.wicket.util.io.IClusterable;
 
 /**
  * Workshop Request POJO
  * @author AJ
  */
-public final class WorkshopRequest {
+public final class WorkshopRequest implements IClusterable {
 	
 	private String nameOfGroup;
 	private String nameOfContact;
@@ -16,17 +21,41 @@ public final class WorkshopRequest {
 	private WorkshopType workshopType;
 	private String location;
 	private Date date;
-	private Date startTime;
-	private Date endTime;
+	private LocalTime startTime;
+	private LocalTime endTime;
 	private Date alternateDate;
-	private Date alternateStartTime;
-	private Date alternateEndTime;
+	private LocalTime alternateStartTime;
+	private LocalTime alternateEndTime;
 	private int participants;
-	private int areas;
+	private List<Area> areas;
+	private int areasValue;
 	private String howDidYouHear;
 	private String special;
+	
+	public String toString() {
+		return "WorkshopRequest:" +
+				"\n\tnameOfGroup: " + nameOfGroup +
+				"\n\tnameOfContact: " + nameOfContact +
+				"\n\tconsist75: " + consist75 +
+				"\n\tcontactEmail: " + contactEmail +
+				"\n\tcontactPhone: " + contactPhone +
+				"\n\tworkshopType: " + workshopType +
+				"\n\tlocation: " + location +
+				"\n\tdate: " + date +
+				"\n\tstartTime: " + startTime +
+				"\n\tendTime: " + endTime +
+				"\n\talternateDate: " + alternateDate +
+				"\n\talternateStartTime: " + alternateStartTime +
+				"\n\talternateEndTime: " + alternateEndTime +
+				"\n\tparticipants: " + participants +
+				"\n\tareas: " + areas +
+				"\n\tareasValue: " + areasValue +
+				"\n\thowDidYouHear: " + howDidYouHear +
+				"\n\tspecial: " + special;
+	}
 
 	public WorkshopRequest() {
+		this.areas = new ArrayList<Area>();
 	}
 
 	public String getNameOfGroup() {
@@ -93,19 +122,19 @@ public final class WorkshopRequest {
 		this.date = date;
 	}
 
-	public Date getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public LocalTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
 
@@ -117,19 +146,19 @@ public final class WorkshopRequest {
 		this.alternateDate = alternateDate;
 	}
 
-	public Date getAlternateStartTime() {
+	public LocalTime getAlternateStartTime() {
 		return alternateStartTime;
 	}
 
-	public void setAlternateStartTime(Date alternateStartTime) {
+	public void setAlternateStartTime(LocalTime alternateStartTime) {
 		this.alternateStartTime = alternateStartTime;
 	}
 
-	public Date getAlternateEndTime() {
+	public LocalTime getAlternateEndTime() {
 		return alternateEndTime;
 	}
 
-	public void setAlternateEndTime(Date alternateEndTime) {
+	public void setAlternateEndTime(LocalTime alternateEndTime) {
 		this.alternateEndTime = alternateEndTime;
 	}
 
@@ -141,12 +170,15 @@ public final class WorkshopRequest {
 		this.participants = participants;
 	}
 
-	public int getAreas() {
+	public List<Area> getAreas() {
 		return areas;
 	}
 
-	public void setAreas(int areas) {
+	public void setAreas(List<Area> areas) {
 		this.areas = areas;
+		this.setAreasValue(0);
+		for (Area a : areas)
+			this.setAreasValue(this.getAreasValue() + a.getValue());
 	}
 
 	public String getHowDidYouHear() {
@@ -163,6 +195,14 @@ public final class WorkshopRequest {
 
 	public void setSpecial(String special) {
 		this.special = special;
+	}
+
+	public int getAreasValue() {
+		return areasValue;
+	}
+
+	private void setAreasValue(int areasValue) {
+		this.areasValue = areasValue;
 	}
 
 }

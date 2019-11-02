@@ -15,20 +15,20 @@ public enum WorkshopType implements IClusterable {
 	private WorkshopType(int type) {
 		this.type = type;
 		switch(type) {
-		case 1:
+		case 0:
 			this.name = "High Ropes Course (Open April 1st-November 1st)";
 			break;
-		case 2:
+		case 1:
 			this.name = "Low Ropes Course (Open April 1st-November 1st)";
 			break;
-		case 3:
+		case 2:
 			this.name = "Ground/Teambuilding Workshop";
 			break;
-		case 4:
+		case 3:
 			this.name = "Unsure";
 			break;
 			default:
-				throw new IllegalArgumentException("Unknown type");
+				throw new IllegalArgumentException("Unknown type: " + type);
 		}
 	}
 
