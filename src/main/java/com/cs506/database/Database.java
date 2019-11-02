@@ -130,7 +130,7 @@ public class Database {
 
                   alternateDate, alternateStart, alternateEnd, request.getParticipants(),
 
-                  request.getAreas(), request.getHowDidYouHear(), request.getSpecial());
+                  request.getAreasValue(), request.getHowDidYouHear(), request.getSpecial());
 
     try {
 

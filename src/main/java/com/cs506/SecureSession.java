@@ -39,8 +39,6 @@ public final class SecureSession extends AuthenticatedWebSession
     	
     	
     	Database db = new Database();
-//    	db.addUser("ryan2", "password2", 1);
-//    	System.out.println("added user ryan2");
     	
     	LinkedList<String[]> list = null;
     	try {	
