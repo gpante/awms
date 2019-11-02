@@ -16,9 +16,13 @@
  */
 package com.cs506;
 
+import java.util.LinkedList;
+
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
+
+import com.cs506.database.Database;
 
 
 public final class SecureSession extends AuthenticatedWebSession
@@ -33,22 +37,23 @@ public final class SecureSession extends AuthenticatedWebSession
     @Override
     public final boolean authenticate(final String username, final String password) {
     	
-    	//temp login
-    	if (username.equals(password) && username.equals("test")) {
-    		setUser(new User(username));
-    		return true;
-    	} else
-    		return false;
     	
-//    	User user = null;
-//    	// TODO load user info from db
-//    	
-//    	if (user != null) {
-//    		setUser(user);
-//    		return true;
-//    	} else {
-//    		return false;
-//    	}
+    	Database db = new Database();
+//    	db.addUser("ryan2", "password2", 1);
+//    	System.out.println("added user ryan2");
+    	
+    	LinkedList<String[]> list = null;
+    	try {	
+    		list = db.getUser(username, password);
+    		System.out.println(list.getFirst()[0] + list.getFirst()[1] + list.getFirst()[2]);
+    	}catch(Exception e) {
+    		System.out.print(e);
+    		return false;
+    	}
+    	
+    	setUser(new User(username));
+		return true;
+    	
     }
 
     public User getUser() {
