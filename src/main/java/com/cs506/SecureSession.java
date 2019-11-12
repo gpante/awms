@@ -46,9 +46,11 @@ public final class SecureSession extends AuthenticatedWebSession
     		System.out.println(list.getFirst()[0] + list.getFirst()[1] + list.getFirst()[2]);
     	}catch(Exception e) {
     		System.out.print(e);
+    		db.closeConn();
     		return false;
     	}
     	
+    	db.closeConn();
     	setUser(new User(username));
 		return true;
     	
