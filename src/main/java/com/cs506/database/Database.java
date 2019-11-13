@@ -97,13 +97,11 @@ public class Database {
     if (request.getAlternateEndTime() != null) {
       alternateEnd = request.getAlternateEndTime().toString();
     }
-    if (request.isConsist75() == false) {
-      consist75 = 0;
-    }
     if (request.isConsist75() == true) {
       consist75 = 1;
     }
 
+    //TODO fix to add workshop type and unique name
     String sql = String.format("INSERT INTO workshop (name, "
                   + "group_name, contact_name, contact_phone, "
                   + "contact_email, location, consist_75, date, start, end, "
@@ -159,7 +157,7 @@ public class Database {
   public LinkedList<String[]> getAllWorkshops() {    
 
 	    LinkedList<String[]> list = new LinkedList<String[]>();
-	    String sql = ("SELECT * FROM workshop");
+	    String sql = ("SELECT * FROM workshop order by date desc");
 	    ResultSet result = null;
 
 	    try {
@@ -169,13 +167,14 @@ public class Database {
 	      System.out.println("results");
 
 	      while (result.next()) {
-	        String[] array = {result.getString("name"), result.getString("workshop_type_name"), 
-	        	result.getString("workshop_type"), result.getString("group_name"), 
-	            result.getString("contact_name"), result.getString("contact_phone"), result.getString("contact_email"),
-	            result.getString("location"), result.getString("consist_75"), result.getString("date"),
-	            result.getString("start"), result.getString("end"), result.getString("alternate_date"),
-	            result.getString("alternate_start"), result.getString("alternate_end"), result.getString("participants"),
-	            result.getString("areas"), result.getString("how_you_heard"), result.getString("special")};
+				String[] array = {result.getString("group_name"), result.getString("contact_name"), 
+						result.getString("consist_75"), result.getString("contact_email"), 
+						result.getString("contact_phone"), result.getString("workshop_type_name"),
+						result.getString("location"), result.getString("date"), result.getString("start"), 
+						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"), 
+						result.getString("alternate_end"), result.getString("participants"), result.getString("areas"), 
+						result.getString("how_you_heard"), result.getString("special"), 
+						result.getString("name"), result.getString("workshop_type")};
 	            list.add(array);
 	    }
 	    } catch (SQLException e) {

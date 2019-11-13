@@ -179,7 +179,7 @@ public class WorkshopRequestPanel extends Panel {
 			
 			Database db = new Database();
 			try {	
-	    		db.addWorkshop(request, "test");
+	    		db.addWorkshop(request, "wtfisthisfor");
 	    		System.out.println("submitted");
 	    	}catch(Exception e) {
 	    		System.out.print(e);
