@@ -70,6 +70,7 @@ public class Database {
 	  try {
 		  if(db != null) {
 			  db.close();
+			  System.out.println("connection closed");
 		  }
 	  } catch(SQLException e) {
 		  System.out.println(e.getMessage());
@@ -168,14 +169,14 @@ public class Database {
 	      System.out.println("results");
 
 	      while (result.next()) {
-//	        String[] array = {result.getString("name"), result.getString("group_name"), 
-//	            result.getString("contact_name"), result.getString("contact_phone"), result.getString("contact_email"),
-//	            result.getString("location"), result.getString("consist_75"), result.getString("date"),
-//	            result.getString("start"), result.getString("end"), result.getString("alternate_date"),
-//	            result.getString("alternate_start"), result.getString("alternate_end"), result.getString("participants"),
-//	            result.getString("areas"), result.getString("how_you_heard"), result.getString("special")};
-//	            list.add(array);
-	            System.out.println(result);
+	        String[] array = {result.getString("name"), result.getString("workshop_type_name"), 
+	        	result.getString("workshop_type"), result.getString("group_name"), 
+	            result.getString("contact_name"), result.getString("contact_phone"), result.getString("contact_email"),
+	            result.getString("location"), result.getString("consist_75"), result.getString("date"),
+	            result.getString("start"), result.getString("end"), result.getString("alternate_date"),
+	            result.getString("alternate_start"), result.getString("alternate_end"), result.getString("participants"),
+	            result.getString("areas"), result.getString("how_you_heard"), result.getString("special")};
+	            list.add(array);
 	    }
 	    } catch (SQLException e) {
 	    	System.out.println("error");
