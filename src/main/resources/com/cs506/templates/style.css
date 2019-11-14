@@ -1681,3 +1681,17 @@ input.lcheckbox {
 input.ltextbox {
 	height: 25px;
 }
+
+table#requests {
+  width: 100%;
+  background-color: #f1f1c1;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table#requests tr, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+
