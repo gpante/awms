@@ -1682,16 +1682,19 @@ input.ltextbox {
 	height: 25px;
 }
 
-table#requests {
+.requests {
   width: 100%;
   background-color: #f1f1c1;
   border: 1px solid black;
   border-collapse: collapse;
+  overflow-x:auto;
+  padding: 5px;
+  /*
 }
 table#requests tr, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 5px;
 }
-
+*/
 
