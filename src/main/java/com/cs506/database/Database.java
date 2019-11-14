@@ -21,10 +21,8 @@ public class Database {
                           + "password TEXT NOT NULL, "
                           + "permission_lvl INTEGER DEFAULT 0)");
         statement.execute("CREATE TABLE IF NOT EXISTS workshop ("
-                          + "name TEXT NOT NULL UNIQUE, "
                           + "workshop_type_name TEXT, "
-                          + "workshop_type INT, "
-                          + "group_name TEXT NOT NULL, "
+                          + "group_name TEXT NOT NULL UNIQUE, "
                           + "contact_name TEXT NOT NULL, "
                           + "contact_phone TEXT NOT NULL, "
                           + "contact_email TEXT NOT NULL, "
@@ -42,14 +40,14 @@ public class Database {
                           + "special TEXT)");
         statement.execute("CREATE TABLE IF NOT EXISTS signed_up ("
                           + "username TEXT, "
-                          + "name TEXT, "
-                          + "PRIMARY KEY (username, name), "
+                          + "group_name TEXT, "
+                          + "PRIMARY KEY (username, group_name), "
                           + "FOREIGN KEY (username) "
                           + "REFERENCES account (username) "
                           + "ON DELETE CASCADE "
                           + "ON UPDATE CASCADE, "
-                          + "FOREIGN KEY (name) "
-                          + "REFERENCES workshop (name) "
+                          + "FOREIGN KEY (group_name) "
+                          + "REFERENCES workshop (group_name) "
                           + "ON DELETE CASCADE "
                           + "ON UPDATE CASCADE)");
         System.out.println("db connected");
@@ -78,7 +76,7 @@ public class Database {
   }
   
 
-  public void addWorkshop(WorkshopRequest request, String name) {
+  public void addWorkshop(WorkshopRequest request) {
 
     String date = request.getDate().toString();
     String start = request.getStartTime().toString();
@@ -86,6 +84,7 @@ public class Database {
     String alternateDate = new String();
     String alternateStart = new String();
     String alternateEnd = new String();
+    String workshopType = request.getWorkshopType().toString();
     int consist75 = 0;
 
     if (request.getAlternateDate() != null) {
@@ -101,19 +100,18 @@ public class Database {
       consist75 = 1;
     }
 
-    //TODO fix to add workshop type and unique name
-    String sql = String.format("INSERT INTO workshop (name, "
+    String sql = String.format("INSERT INTO workshop (workshop_type_name, "
                   + "group_name, contact_name, contact_phone, "
                   + "contact_email, location, consist_75, date, start, end, "
                   + "alternate_date, alternate_start, alternate_end, participants, "
                   + "areas, how_you_heard, special) "
-                  + "VALUES ('" + name + "', "
+                  + "VALUES ("
                   + "'%1$s', '%2$s', '%3$s', "
-                  + "'%4$s', '%5$s', %6$d, '%7$s', '%8$s', '%9$s', "
-                  + "'%10$s', '%11$s', '%12$s', %13$d, "
-                  + "%14$d, '%15$s', '%16$s')",
+                  + "'%4$s', '%5$s', %6$s, '%7$d', '%8$s', '%9$s', "
+                  + "'%10$s', '%11$s', '%12$s', %13$s, "
+                  + "%14$d, '%15$d', '%16$s', '%17$s')",
 
-                  request.getNameOfGroup(), request.getNameOfContact(), request.getContactPhone(),
+                  workshopType, request.getNameOfGroup(), request.getNameOfContact(), request.getContactPhone(),
                   request.getContactEmail(), request.getLocation(), consist75, date, start, end,
                   alternateDate, alternateStart, alternateEnd, request.getParticipants(),
                   request.getAreasValue(), request.getHowDidYouHear(), request.getSpecial());
@@ -173,8 +171,7 @@ public class Database {
 						result.getString("location"), result.getString("date"), result.getString("start"), 
 						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"), 
 						result.getString("alternate_end"), result.getString("participants"), result.getString("areas"), 
-						result.getString("how_you_heard"), result.getString("special"), 
-						result.getString("name"), result.getString("workshop_type")};
+						result.getString("how_you_heard"), result.getString("special")};
 	            list.add(array);
 	    }
 	    } catch (SQLException e) {

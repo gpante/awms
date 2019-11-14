@@ -40,9 +40,7 @@ public class WorkshopTable extends Base {
                            item.add(new Label("participants", new PropertyModel(item.getModel(), "13")));
                            item.add(new Label("areas", new PropertyModel(item.getModel(), "14")));
                            item.add(new Label("howHeard", new PropertyModel(item.getModel(), "15")));
-                           item.add(new Label("special", new PropertyModel(item.getModel(), "16")));
-                           item.add(new Label("extra1", new PropertyModel(item.getModel(), "17")));
-                           item.add(new Label("extra2", new PropertyModel(item.getModel(), "18")));     
+                           item.add(new Label("special", new PropertyModel(item.getModel(), "16")));   
                 }
 			});
 		} catch(Exception e) {
