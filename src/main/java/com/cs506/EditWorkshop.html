@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Edit Workshop</title>
+</head>
+<body>
+<wicket:extend>
+    <div id="bd">
+        <h3>Workshop Requests</h3>
+        <table class="requests">
+            <tr class="requests">
+                <th class="requests">Edit Group Name</th>
+                <th class="requests">Contact Name</th>
+                <th class="requests">75% Students</th>
+                <th class="requests">Email</th>
+                <th class="requests">Phone</th>
+                <th class="requests">Workshop Type</th>
+                <th class="requests">Location</th>
+                <th class="requests">Date</th>
+                <th class="requests">Start Time</th>
+                <th class="requests">End Time</th>
+                <th class="requests">Alternate Date</th>
+                <th class="requests">Alternate Start</th>
+                <th class="requests">Alternate End</th>
+                <th class="requests">Participants</th>
+                <th class="requests">Focus Areas</th>
+                <th class="requests">How Heard</th>
+                <th class="requests">Special</th>
+            </tr>
+            <tr wicket:id="workshops" class="requests">
+                <td wicket:id="groupName" class="requests"></td>
+                <td wicket:id="contactName" class="requests"></td>
+                <td wicket:id="consist75" class="requests"></td>
+                <td wicket:id="email" class="requests"></td>
+                <td wicket:id="phone" class="requests"></td>
+                <td wicket:id="workshopType" class="requests"></td>
+                <td wicket:id="location" class="requests"></td>
+                <td wicket:id="date" class="requests"></td>
+                <td wicket:id="startTime" class="requests"></td>
+                <td wicket:id="endTime" class="requests"></td>
+                <td wicket:id="altDate" class="requests"></td>
+                <td wicket:id="altStart" class="requests"></td>
+                <td wicket:id="altEnd" class="requests"></td>
+                <td wicket:id="participants" class="requests"></td>
+                <td wicket:id="areas" class="requests"></td>
+                <td wicket:id="howHeard" class="requests"></td>
+                <td wicket:id="special" class="requests"></td>
+            </tr>
+        </table>
+    </div>
+    <div wicket:id="workshopRequestPanel">
+    </div>
+</wicket:extend>
+</body>
+</html>
