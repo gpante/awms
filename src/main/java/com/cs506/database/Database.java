@@ -157,10 +157,43 @@ public class Database {
   		return list;
   	}
  
-  	//TODO edit query
-  	public void editWorkshop(String name) {    
+  	public void editWorkshop(String name, WorkshopRequest request) {    
   		
-  		String sql = ("UPDATE * FROM workshop WHERE group_name = '" + name + "'");
+		String date = request.getDate().toString();
+    		String start = request.getStartTime().toString();
+    		String end = request.getEndTime().toString();
+    		String alternateDate = new String();
+    		String alternateStart = new String();
+    		String alternateEnd = new String();
+    		String workshopType = request.getWorkshopType().toString();
+    		int consist75 = 0;
+
+    		if (request.getAlternateDate() != null) {
+      			alternateDate = request.getAlternateDate().toString();
+    		}
+    		if (request.getAlternateStartTime() != null) {
+      			alternateStart = request.getAlternateStartTime().toString();
+    		}
+    		if (request.getAlternateEndTime() != null) {
+      			alternateEnd = request.getAlternateEndTime().toString();
+    		}
+    		if (request.isConsist75() == true) {
+      			consist75 = 1;
+    		}
+
+    		String sql = String.format("UPDATE workshop SET workshop_type_name = '%1$s', "
+					   + "contact_name = '%2$s', contact_phone = '%3$s', contact_email = '%4$s', "
+					   + "location = '%5$s', consist_75 = %6$d, date = '%7$s', start = '%8$s', end = '%9$s', "
+					   + "alternate_date = '%10$s', alternate_start = '%11$s', alternate_end = '%12$s', "
+					   + "participants = %13$d, areas = %14$d, how_you_heard = '%15$s', special = '%16$s' "
+					   + "WHERE group_name = '%17$s'",
+					   
+				workshopType, request.getNameOfContact(), request.getContactPhone(),
+                  		request.getContactEmail(), request.getLocation(), consist75, date, start, end,
+                  		alternateDate, alternateStart, alternateEnd, request.getParticipants(),
+                  		request.getAreasValue(), request.getHowDidYouHear(), request.getSpecial(),
+		  		request.getNameOfGroup());
+
   		try {
   			Statement statement = db.createStatement();
   			statement.executeQuery(sql);
