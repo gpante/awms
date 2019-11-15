@@ -1,20 +1,88 @@
 
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
-	<head>
-		<meta charset="utf-8" />
-		<title>Adventure Learning Programs</title>
-	</head>
-	<body>
-		<wicket:extend>
-			<div id="bd">
-				<h3>Adventure Learning Programs</h3>
-				<p>
-					Put description about workshop types here
-				</p> 
+<head>
+<meta charset="utf-8" />
+<title>Adventure Learning Programs</title>
+</head>
+<body>
+	<wicket:extend>
+		<div id="ro">
+			<div style="margin-left: 150px; margin-right: 150px;">
+				<div>
+					<wicket:link>
+						<a href="HomePage.html"
+							style="color: red; font-size: 13px; display: inline-block;'">Home</a>
+					</wicket:link>
+					&#160;
+					<p style="font-size: 13px; display: inline-block;">/ Workshops</p>
+				</div>
+
+				<h1 style="height: 1.5em;">Workshops</h1>
+
+				<div style="display: inline-block; width: 49%; height: 325px;overflow-y:auto;'">
+					An ALPs Workshop Is Meant To:
+					<ul style="padding-left: 30px;"> 
+						<li style="margin-bottom:10px;margin-top:10px;">Gain individual and group awareness</li>
+						<li style="margin-bottom:10px;">Enhance communication skills</li>
+						<li style="margin-bottom:10px;">Improve goal setting, planning, and strategizing</li>
+						<li style="margin-bottom:10px;">Strengthen decision-making skills</li>
+						<li style="margin-bottom:10px;">Develop a greater appreciation and respect for differences within a group</li>
+						<li style="margin-bottom:10px;">Increase team spirit</li>
+						<li>Have fun!</li>
+					</ul>
+				</div>
+
+				<div style="display: inline-block; width: 49%; height: 400px; float: right;">
+					<iframe width="560" height="315" style="border-radius:5px;" src="https://www.youtube.com/embed/IabH1y3g_fw" 
+					frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+					allowfullscreen></iframe>
+				</div>
 			</div>
-		</wicket:extend>
-	</body>
+			<h2 style="height: 1.5em;display:inline-block;width:100%;
+			text-align:center;margin-bottom:0px;">Learn About Each Workshop Type!</h2>
+			<div style="margin-top:0px;background-color:red;width:100%;height:2px;"></div>
+			
+			<div style="width:100%;height:600px;margin-top:20px;vertica-align:top;">		<!-- Account for screen getting smaller -->
+			
+				<div style="width:31%;height:100%;display:inline-block;border:1px solid #c4c4cc;
+				border-radius:6px;vertical-align:top;">
+					<img width="100%" height="48%" style="border-radius:5px;vertical-align:top;margin-bottom:1em;"
+					src="https://alps.cfli.wisc.edu/wp-content/uploads/sites/271/2016/09/Low-ropes2-900x600.jpg"/>
+					<h3 style="color:red;display:block;width:100%;text-align:center;margin-bottom:5px;
+					height:1em;">Low Ropes Course</h3>
+					<hr style="width:90%;margin-left:5%;height:1px;background-color:black;border:none;"/>
+					<p style="margin-left:5%;margin-right:5%;">A low ropes course provides a unique experience where groups participate in activites both on the ground as 
+					well as a 2-12 feet off of the ground. Our low ropes course is open April 1st to November 1st.</p>
+				</div>
+				
+				<div style="width:31%;height:100%;display:inline-block;border:1px solid #c4c4cc;margin-left:1.5%;
+				border-radius:6px;vertical-align:top;">
+					<img width="100%" height="48%" style="border-radius:5px;vertical-align:top;margin-bottom:1em;"
+					src="https://alps.cfli.wisc.edu/wp-content/uploads/sites/271/2016/09/High-Ropes2-900x600.jpg"/>
+					<h3 style="color:red;display:block;width:100%;text-align:center;margin-bottom:5px;
+					height:1em;">High Ropes Course</h3>
+					<hr style="width:90%;margin-left:5%;height:1px;background-color:black;border:none;"/>
+					<p style="margin-left:5%;margin-right:5%;">The high ropes course provides the opportunity for individuals within the group to challenge themselves by 
+					navigating obstacles constructed between 40' telephone poles. 
+					Our high ropes course is open April 1st-November 1st.</p>
+				</div>
+				
+				<div style="width:31%;height:100%;display:inline-block;border:1px solid #c4c4cc;margin-left:1.5%;
+				border-radius:6px;vertical-align:top;">
+					<img width="100%" height="48%" style="border-radius:5px;vertical-align:top;margin-bottom:1em;"
+					src="https://alps.cfli.wisc.edu/wp-content/uploads/sites/271/2016/09/Ground-workshop-900x600.jpg"/>
+					<h3 style="color:red;display:block;width:100%;text-align:center;margin-bottom:5px;
+					height:2em;">Teambuilding Workshop (Ground Workshop)</h3>
+					<hr style="width:90%;margin-left:5%;height:1px;background-color:black;border:none;"/>
+					<p style="margin-left:5%;margin-right:5%;">Teambuilding or ground workshops take place all over campus, depending on where the group can find a location 
+					space. We often do workshops outside, in various classrooms, in rooms at the Union… anywhere!</p>
+				</div>
+			
+			</div>
+		</div>
+	</wicket:extend>
+</body>
 </html>
 
 

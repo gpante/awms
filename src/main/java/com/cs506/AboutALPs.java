@@ -1,6 +1,3 @@
-
-
-
 package com.cs506;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -13,11 +10,12 @@ public class AboutALPs extends Base {
 
 	public AboutALPs(final PageParameters parameters) {
 		super();
-
 		//add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
-
+		
 		// TODO Add your page's components here
 
 	}
+	
+	
 }
 

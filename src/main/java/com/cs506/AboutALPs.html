@@ -1,18 +1,81 @@
 
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
-	<head>
-		<meta charset="utf-8" />
-		<title>Adventure Learning Programs</title>
-	</head>
-	<body>
-		<wicket:extend>
-			<div id="bd">
-				<h3>Adventure Learning Programs</h3>
-				<p>
-					Put description about ALPs here
-				</p> 
+<head>
+<meta charset="utf-8" />
+<title>Adventure Learning Programs</title>
+</head>
+<body>
+	<wicket:extend>
+		
+		<div style="width:100%;height:55vh;display:block;margin-bottom:5px"> <!-- Need to get scaling correct -->
+		<img id="actualImage" width="100%" height="55%"
+				src="https://alps.cfli.wisc.edu/wp-content/uploads/sites/271/2019/01/ALPs-retreat-photo-2018-cropped-1600x500.jpg"
+				style="margin-top: 0px; position: absolute; left: 0px;top:118px;" />
+		</div>
+
+
+		<div id="bd">
+
+			<div style="margin-left: 150px; margin-right: 150px;">
+				<div>
+					<wicket:link>
+						<a href="HomePage.html"
+							style="color: red; font-size: 13px; display: inline-block;'">Home</a>
+					</wicket:link>
+					&#160;
+					<p style="font-size: 13px; display: inline-block">/ About Us</p>
+				</div>
+
+				<h1 style="height: 1.5em;">About Us</h1>
+
+				<button id="mission"
+					onClick="function check(){if(document.getElementById('missionStatement').style.display === 'none') {document.getElementById('missionStatement').style.display = '';document.getElementById('mission').innerHTML='- Our Mission and Who We Are';} else {document.getElementById('missionStatement').style.display = 'none';document.getElementById('mission').innerHTML='+ Our Mission and Who We Are';}} check();"
+					style="background-color: white; margin-top: 35px; padding: 5px; width: 100%; color: black; border: 1px solid #c4c4cc; text-align: left;">+
+					Our Mission and Who We Are</button>
+				<p id="missionStatement" style="margin-left: 50px; display: none;">The
+					mission of the Adventure Learning Programs (ALPs) is to challenge
+					people through adventure-based learning to discover themselves and
+					understand those around them. We are a leadership organization that
+					operates under the philosophy of Experiential Education where
+					learners are purposefully engaged in direct experience and focused
+					reflection in order to learn new skills. We offer adventure-based
+					team building workshops that incorporate initiatives, problem
+					solving activities, and high and low ropes course experiences. We
+					are located on the third floor of the Red Gym and are sponsored by
+					the Center for Leadership and Involvement. Because we are funded by
+					segregated fees, ALPS workshops are free to all UW Students!</p>
+
+				<button id="val"
+					onClick="function check(){if(document.getElementById('values').style.display === 'none') {document.getElementById('values').style.display = '';document.getElementById('val').innerHTML='- Our Values';} else {document.getElementById('values').style.display = 'none';document.getElementById('val').innerHTML='+ Our Values';}} check();"
+					style="background-color: white; padding: 5px; width: 100%; color: black; border: 1px solid #c4c4cc; text-align: left;">+
+					Our Values</button>
+				<p id="values"
+					style="margin-left: 50px; padding: 5px; display: none">
+					<b style="font-weight: bold;">GROWTH:</b>&nbsp We are committed to
+					providing opportunities that promote continued personal and group
+					development, learning, and discovery while respecting the fact that
+					growth looks different for everyone. <br>
+					<br> <b style="font-weight: bold; display: inline;">COMMUNITY:</b>&nbsp
+					We strive to create an environment within our organization and in
+					our workshops that is characterized by mutual respect and support
+					so learning can occur. <br>
+					<br> <b style="font-weight: bold; display: inline;">EMPOWERMENT:</b>&nbsp
+					We strive to create opportunities for our staff and participants to
+					strengthen their self-confidence and sense of agency in their daily
+					lives. <br>
+					<br> <b style="font-weight: bold; display: inline;">AUTHENTICITY:</b>&nbsp
+					We model authenticity within our workshops and our community
+					because we believe that the genuineness of our engagement with one
+					another fosters self-discovery and growth. <br>
+					<br> <b style="font-weight: bold; display: inline;">DIVERSITY
+						AND INCLUSION:</b>&nbsp We value the unique perspectives and life
+					experiences present both in our community and the communities we
+					serve. We intentionally design our workshops to promote inclusive
+					spaces where differences are celebrated.
+				</p>
 			</div>
-		</wicket:extend>
-	</body>
+		</div>
+	</wicket:extend>
+</body>
 </html>
