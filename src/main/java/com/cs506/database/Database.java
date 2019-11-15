@@ -50,6 +50,9 @@ public class Database {
                           + "REFERENCES workshop (group_name) "
                           + "ON DELETE CASCADE "
                           + "ON UPDATE CASCADE)");
+//        statement.execute("CREATE TABLE IF NOT EXISTS more_workshop_info ("
+//        				  + " "
+//        				  + " )");
         System.out.println("db connected");
     } catch (SQLException e) {
         System.out.println(e.getMessage());
