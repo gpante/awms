@@ -194,7 +194,6 @@ public class Database {
 	    		int areaInt = Integer.parseInt(result.getString("areas"));
 	    		if(areaInt >= 0x80) {
 	    			areas = "Resiliency";
-	    			System.out.println("areaInt = " + areaInt);
 	    			areaInt -= 0x80;
 	    		}
 	    		if(areaInt >= 0x40) {
@@ -202,9 +201,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\n" + add);
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areaInt = " + areaInt);
 	    			areaInt -= 0x40;
 	    		}
 	    		if(areaInt >= 0x20) {
@@ -212,9 +210,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\n" + add);
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areaInt = " + areaInt);
 	    			areaInt -= 0x20;
 	    		}
 	    		if(areaInt >= 0x10) {
@@ -222,9 +219,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\n" + add);
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areaInt = " + areaInt);
 	    			areaInt -= 0x10;
 	    		}
 	    		if(areaInt >= 0x08) {
@@ -232,9 +228,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\n" + add);
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areaInt = " + areaInt);
 	    			areaInt -= 0x8;
 	    		}
 	    		if(areaInt >= 0x04) {
@@ -242,9 +237,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\n" + add);
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areas = " + areas);
 	    			areaInt -= 0x4;
 	    		}
 	    		if(areaInt >= 0x02) {
@@ -252,9 +246,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\n" + add);
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areas = " + areas);
 	    			areaInt -= 0x2;
 	    		}
 	    		if(areaInt >= 0x01) {
@@ -262,9 +255,8 @@ public class Database {
 	    			if(areas.equals("")) {
 	    				areas = add;
 	    			} else {
-	    				areas.concat("\nCommunication");
+	    				areas = areas.concat("\n" + add);
 	    			}
-	    			System.out.println("areas = " + areas);
 	    			areaInt -= 0x1;
 	    		}
 	    		System.out.println("areaInt = " + areaInt);
