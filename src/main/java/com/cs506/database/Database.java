@@ -107,9 +107,9 @@ public class Database {
                   + "areas, how_you_heard, special) "
                   + "VALUES ("
                   + "'%1$s', '%2$s', '%3$s', "
-                  + "'%4$s', '%5$s', %6$s, '%7$d', '%8$s', '%9$s', "
-                  + "'%10$s', '%11$s', '%12$s', %13$s, "
-                  + "%14$d, '%15$d', '%16$s', '%17$s')",
+                  + "'%4$s', '%5$s', '%6$s', %7$d, '%8$s', '%9$s', "
+                  + "'%10$s', '%11$s', '%12$s', '%13$s', "
+                  + "%14$d, %15$d, '%16$s', '%17$s')",
 
                   workshopType, request.getNameOfGroup(), request.getNameOfContact(), request.getContactPhone(),
                   request.getContactEmail(), request.getLocation(), consist75, date, start, end,
@@ -125,52 +125,156 @@ public class Database {
   }
 
   
-  public LinkedList<String[]> getWorkshop(String name) {    
+  	public LinkedList<String[]> getWorkshop(String name) {    
 
-    LinkedList<String[]> list = new LinkedList<String[]>();
-    String sql = ("SELECT * FROM workshop WHERE name = '" + name + "'");
-    ResultSet result = null;
+  		LinkedList<String[]> list = new LinkedList<String[]>();
+  		String sql = ("SELECT * FROM workshop WHERE group_name = '" + name + "'");
+  		ResultSet result = null;
 
-    try {
-      Statement statement = db.createStatement();
-      result = statement.executeQuery(sql);
+  		try {
+  			Statement statement = db.createStatement();
+  			result = statement.executeQuery(sql);
 
-      while (result.next()) {
-        String[] array = {result.getString("name"), result.getString("group_name"), 
-            result.getString("contact_name"), result.getString("contact_phone"), result.getString("contact_email"),
-            result.getString("location"), result.getString("consist_75"), result.getString("date"),
-            result.getString("start"), result.getString("end"), result.getString("alternate_date"),
-            result.getString("alternate_start"), result.getString("alternate_end"), result.getString("participants"),
-            result.getString("areas"), result.getString("how_you_heard"), result.getString("special")};
-            list.add(array);
-    }
-    } catch (SQLException e) {
-    	System.out.println(e.getMessage());
-    }
-
-    return list;
-  }
+  			while (result.next()) {
+  				String c75;
+  				if(result.getString("consist_75").equals("1")) {
+  					c75 = "yes";
+  				} else {
+  					c75 = "no";
+  				}
+  				String[] array = {result.getString("group_name"), result.getString("contact_name"), 
+  						c75, result.getString("contact_email"), 
+  						result.getString("contact_phone"), result.getString("workshop_type_name"),
+  						result.getString("location"), result.getString("date"), result.getString("start"), 
+  						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"), 
+  						result.getString("alternate_end"), result.getString("participants"), result.getString("areas"), 
+  						result.getString("how_you_heard"), result.getString("special")};
+  				list.add(array);
+  			}
+  		} catch (SQLException e) {
+  			System.out.println(e.getMessage());
+  		}
+  		return list;
+  	}
+ 
+  	//TODO edit query
+  	public void editWorkshop(String name) {    
+  		
+  		String sql = ("UPDATE * FROM workshop WHERE group_name = '" + name + "'");
+  		try {
+  			Statement statement = db.createStatement();
+  			statement.executeQuery(sql);
+  		} catch (SQLException e) {
+  			System.out.println(e.getMessage());
+  		}
+  	}
+  	
   
-  
-  public LinkedList<String[]> getAllWorkshops() {    
-
+  	public LinkedList<String[]> getAllWorkshops() {    
+  		
 	    LinkedList<String[]> list = new LinkedList<String[]>();
 	    String sql = ("SELECT * FROM workshop order by date desc");
 	    ResultSet result = null;
 
 	    try {
-	      Statement statement = db.createStatement();
-	      System.out.println("executing");
-	      result = statement.executeQuery(sql);
-	      System.out.println("results");
+	    	Statement statement = db.createStatement();
+	    	System.out.println("executing");
+	    	result = statement.executeQuery(sql);
+	    	System.out.println("results");
 
-	      while (result.next()) {
-				String[] array = {result.getString("group_name"), result.getString("contact_name"), 
-						result.getString("consist_75"), result.getString("contact_email"), 
+	    	while (result.next()) {
+	    		String c75;
+	    		if(result.getString("consist_75").equals("1")) {
+	    			c75 = "yes";
+	    		} else {
+	    			c75 = "no";
+	    		}
+	    		
+	    		String areas = new String();
+	    		int areaInt = Integer.parseInt(result.getString("areas"));
+	    		if(areaInt >= 0x80) {
+	    			areas = "Resiliency";
+	    			System.out.println("areaInt = " + areaInt);
+	    			areaInt -= 0x80;
+	    		}
+	    		if(areaInt >= 0x40) {
+	    			String add = "Community Building";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\n" + add);
+	    			}
+	    			System.out.println("areaInt = " + areaInt);
+	    			areaInt -= 0x40;
+	    		}
+	    		if(areaInt >= 0x20) {
+	    			String add = "Goal Setting";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\n" + add);
+	    			}
+	    			System.out.println("areaInt = " + areaInt);
+	    			areaInt -= 0x20;
+	    		}
+	    		if(areaInt >= 0x10) {
+	    			String add = "Vision and Mission";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\n" + add);
+	    			}
+	    			System.out.println("areaInt = " + areaInt);
+	    			areaInt -= 0x10;
+	    		}
+	    		if(areaInt >= 0x08) {
+	    			String add = "Problem Solving/Decision Making";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\n" + add);
+	    			}
+	    			System.out.println("areaInt = " + areaInt);
+	    			areaInt -= 0x8;
+	    		}
+	    		if(areaInt >= 0x04) {
+	    			String add = "Conflict Resolution";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\n" + add);
+	    			}
+	    			System.out.println("areas = " + areas);
+	    			areaInt -= 0x4;
+	    		}
+	    		if(areaInt >= 0x02) {
+	    			String add = "Trust";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\n" + add);
+	    			}
+	    			System.out.println("areas = " + areas);
+	    			areaInt -= 0x2;
+	    		}
+	    		if(areaInt >= 0x01) {
+	    			String add = "Communication";
+	    			if(areas.equals("")) {
+	    				areas = add;
+	    			} else {
+	    				areas.concat("\nCommunication");
+	    			}
+	    			System.out.println("areas = " + areas);
+	    			areaInt -= 0x1;
+	    		}
+	    		System.out.println("areaInt = " + areaInt);
+	    		
+	    		String[] array = {result.getString("group_name"), result.getString("contact_name"), 
+	    				c75, result.getString("contact_email"), 
 						result.getString("contact_phone"), result.getString("workshop_type_name"),
 						result.getString("location"), result.getString("date"), result.getString("start"), 
 						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"), 
-						result.getString("alternate_end"), result.getString("participants"), result.getString("areas"), 
+						result.getString("alternate_end"), result.getString("participants"), areas, 
 						result.getString("how_you_heard"), result.getString("special")};
 	            list.add(array);
 	    }
