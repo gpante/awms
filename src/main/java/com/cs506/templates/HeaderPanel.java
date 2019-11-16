@@ -18,13 +18,14 @@ package com.cs506.templates;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.cs506.HomePage;
 import com.cs506.SecureSession;
 import com.cs506.SignIn;
 import com.cs506.SignOut;
-import com.cs506.WorkshopRequestPage;
+import com.cs506.WorkshopEditPage;
+import com.cs506.database.Database;
 
 public class HeaderPanel extends Panel {
 
@@ -42,6 +43,17 @@ public class HeaderPanel extends Panel {
 			signInLink.add(new Label("signText", "Sign In"));
 			add(signInLink);
 		}
+
+		final Link<Void> viewLink = new Link<Void>("view") {
+
+			@Override
+			public void onClick() {
+				setResponsePage(new WorkshopEditPage(new Database().getWorkshop("Test")));
+			}
+			
+		};
+		viewLink.add(new Label("viewText", "View a Workshop"));
+		add(viewLink);
 //		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
 //		homeLink.add(new Label("homeText", "Home"));
 //		add(homeLink);

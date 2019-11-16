@@ -225,14 +225,14 @@ public class Database {
 					   + "contact_name = '%2$s', contact_phone = '%3$s', contact_email = '%4$s', "
 					   + "location = '%5$s', consist_75 = %6$d, date = '%7$s', start = '%8$s', end = '%9$s', "
 					   + "alternate_date = '%10$s', alternate_start = '%11$s', alternate_end = '%12$s', "
-					   + "participants = %13$d, areas = %14$d, how_you_heard = '%15$s', special = '%16$s' "
-					   + "WHERE group_name = '%17$s'",
+					   + "participants = %13$d, areas = %14$d, how_you_heard = '%15$s', special = '%16$s', group_name = '%17$s' "
+					   + "WHERE group_name = '%18$s'",
 
 				workshopType, request.getNameOfContact(), request.getContactPhone(),
                   		request.getContactEmail(), request.getLocation(), consist75, date, start, end,
                   		alternateDate, alternateStart, alternateEnd, request.getParticipants(),
                   		request.getAreasValue(), request.getHowDidYouHear(), request.getSpecial(),
-		  		request.getNameOfGroup());
+                  		request.getNameOfGroup(), name);
 
   		try {
   			Statement statement = db.createStatement();
