@@ -3,10 +3,12 @@ package com.cs506;
 import java.util.LinkedList;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+
 import com.cs506.database.Database;
 import com.cs506.templates.Base;
 
@@ -24,7 +26,16 @@ public class WorkshopTable extends Base {
 			add(new ListView<String[]>("workshops", workshops) {
                 @Override
                 protected void populateItem(ListItem<String[]> item) {
-                           item.add(new Label("groupName", new PropertyModel(item.getModel(), "0")));
+                    final Link<Void> workshopLink = new Link<Void>("link") {
+
+            				@Override
+            				public void onClick() {
+            					setResponsePage(new WorkshopEditPage(new Database().getWorkshop(item.getModel().getObject()[0])));
+            				}
+        				
+        				};
+                        	workshopLink.add(new Label("groupNameText", new PropertyModel(item.getModel(), "0")));
+                        	item.add(workshopLink);
                            item.add(new Label("contactName", new PropertyModel(item.getModel(), "1")));
                            item.add(new Label("consist75", new PropertyModel(item.getModel(), "2")));
                            item.add(new Label("email", new PropertyModel(item.getModel(), "3")));

@@ -97,6 +97,7 @@ public class WorkshopEditPanel extends Panel {
 			workshopTypeGroup.add(new Radio<>("low", new Model<WorkshopType>(WorkshopType.LOW_ROPES_COURSE)));
 			workshopTypeGroup.add(new Radio<>("ground", new Model<WorkshopType>(WorkshopType.GROUND)));
 			workshopTypeGroup.add(new Radio<>("unsure", new Model<WorkshopType>(WorkshopType.UNSURE)));
+			workshopTypeGroup.setModelObject(request.getWorkshopType());
 			add(workshopTypeGroup);
 			
 			final TextField<String> location = new TextField<>("location");
