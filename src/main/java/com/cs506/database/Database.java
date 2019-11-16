@@ -122,7 +122,7 @@ public class Database {
     } catch (SQLException e) {
       System.out.println(e.getMessage());
       return -1;
-    )
+    }
       return 1;
   }
 
@@ -202,7 +202,7 @@ public class Database {
   		} catch (SQLException e) {
   			System.out.println(e.getMessage());
   		return -1;
-    		)
+  		}
       		return 1;
   	}
   	
@@ -326,7 +326,7 @@ public class Database {
     } catch (SQLException e) {
       System.out.println(e.getMessage());
     return -1;
-    )
+    }
       return 1;
   }
 
