@@ -76,7 +76,7 @@ public class Database {
   }
   
 
-  public void addWorkshop(WorkshopRequest request) {
+  public int addWorkshop(WorkshopRequest request) {
 
     String date = request.getDate().toString();
     String start = request.getStartTime().toString();
@@ -121,7 +121,9 @@ public class Database {
       statement.execute(sql);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
-    }
+      return -1;
+    )
+      return 1;
   }
 
   
@@ -157,7 +159,7 @@ public class Database {
   		return list;
   	}
  
-  	public void editWorkshop(String name, WorkshopRequest request) {    
+  	public int editWorkshop(String name, WorkshopRequest request) {    
   		
 		String date = request.getDate().toString();
     		String start = request.getStartTime().toString();
@@ -199,7 +201,9 @@ public class Database {
   			statement.executeQuery(sql);
   		} catch (SQLException e) {
   			System.out.println(e.getMessage());
-  		}
+  		return -1;
+    		)
+      		return 1;
   	}
   	
   
@@ -312,7 +316,7 @@ public class Database {
 	  }
 
   
-  public void addUser(String username, String password, int permission) {
+  public int addUser(String username, String password, int permission) {
 
 	String sql = ("INSERT INTO account VALUES ('" + username + "', '" + password + "', '" + permission + "')");
 
@@ -321,7 +325,9 @@ public class Database {
       statement.execute(sql);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
-    }
+    return -1;
+    )
+      return 1;
   }
 
 
