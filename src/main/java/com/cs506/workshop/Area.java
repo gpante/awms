@@ -170,4 +170,33 @@ public abstract class Area implements Serializable {
 		return list;
 	}
 	
+	public static final List<Area> getAreasFromValue(int value) {
+		List<Area> list = new ArrayList<Area>();
+		Communication c = new Communication();
+		if ((value&c.getValue()) == c.getValue())
+		list.add(c);
+		Trust t = new Trust();
+		if ((value&t.getValue()) == t.getValue())
+		list.add(t);
+		ConflictResolution cr = new ConflictResolution();
+		if ((value&cr.getValue()) == cr.getValue())
+		list.add(cr);
+		ProblemSolving ps = new ProblemSolving();
+		if ((value&ps.getValue()) == ps.getValue())
+		list.add(ps);
+		VisionAndMission vam = new VisionAndMission();
+		if ((value&vam.getValue()) == vam.getValue())
+		list.add(vam);
+		GoalSetting gs = new GoalSetting();
+		if ((value&gs.getValue()) == gs.getValue())
+		list.add(gs);
+		CommunityBuilding cb = new CommunityBuilding();
+		if ((value&cb.getValue()) == cb.getValue())
+		list.add(cb);
+		Resiliency r = new Resiliency();
+		if ((value&r.getValue()) == r.getValue())
+		list.add(r);
+		return list;
+	}
+	
 }

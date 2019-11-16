@@ -20,8 +20,6 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.cs506.AboutALPs;
-import com.cs506.AboutWorkshops;
 import com.cs506.HomePage;
 import com.cs506.SecureSession;
 import com.cs506.SignIn;
