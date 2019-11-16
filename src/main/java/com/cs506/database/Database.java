@@ -20,9 +20,9 @@ import com.cs506.workshop.WorkshopType;
 public class Database {
 
   Connection db = null;
-  
+
   public static final SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("us"));
-  
+
 
   public Database() {
 
@@ -73,7 +73,7 @@ public class Database {
     	} catch(SQLException ex) {
     		System.out.println(ex.getMessage());
     	}
-    } 
+    }
   }
 
 
@@ -87,7 +87,7 @@ public class Database {
 		  System.out.println(e.getMessage());
 	  }
   }
-  
+
 
   public int addWorkshop(WorkshopRequest request) {
 
@@ -139,8 +139,8 @@ public class Database {
       return 1;
   }
 
-  
-  	public WorkshopRequest getWorkshop(String name) {    
+
+  	public WorkshopRequest getWorkshop(String name) {
 
   		String sql = ("SELECT * FROM workshop WHERE group_name = '" + name + "'");
   		ResultSet result = null;
@@ -181,11 +181,11 @@ public class Database {
   		}
   		return null;
   	}
- 
+
 	public int delWorkshop(String name) {
-		
+
 		String sql = "DELETE FROM workshop WHERE group_name = '" + name + "'";
-		
+
 		try {
   			Statement statement = db.createStatement();
   			statement.executeQuery(sql);
@@ -196,9 +196,9 @@ public class Database {
 		}
       		return 1;
   	}
-	
-  	public int editWorkshop(String name, WorkshopRequest request) {    
-  		
+
+  	public int editWorkshop(String name, WorkshopRequest request) {
+
 		String date = request.getDate().toString();
     		String start = request.getStartTime().toString();
     		String end = request.getEndTime().toString();
@@ -227,7 +227,7 @@ public class Database {
 					   + "alternate_date = '%10$s', alternate_start = '%11$s', alternate_end = '%12$s', "
 					   + "participants = %13$d, areas = %14$d, how_you_heard = '%15$s', special = '%16$s' "
 					   + "WHERE group_name = '%17$s'",
-					   
+
 				workshopType, request.getNameOfContact(), request.getContactPhone(),
                   		request.getContactEmail(), request.getLocation(), consist75, date, start, end,
                   		alternateDate, alternateStart, alternateEnd, request.getParticipants(),
@@ -244,10 +244,10 @@ public class Database {
 		}
       		return 1;
   	}
-  	
-  
-  	public LinkedList<String[]> getAllWorkshops() {    
-  		
+
+
+  	public LinkedList<String[]> getAllWorkshops() {
+
 	    LinkedList<String[]> list = new LinkedList<String[]>();
 	    String sql = ("SELECT * FROM workshop order by date desc");
 	    ResultSet result = null;
@@ -265,7 +265,7 @@ public class Database {
 	    		} else {
 	    			c75 = "no";
 	    		}
-	    		
+
 	    		String areas = new String();
 	    		int areaInt = Integer.parseInt(result.getString("areas"));
 	    		if(areaInt >= 0x80) {
@@ -336,13 +336,13 @@ public class Database {
 	    			areaInt -= 0x1;
 	    		}
 	    		System.out.println("areaInt = " + areaInt);
-	    		
-	    		String[] array = {result.getString("group_name"), result.getString("contact_name"), 
-	    				c75, result.getString("contact_email"), 
+
+	    		String[] array = {result.getString("group_name"), result.getString("contact_name"),
+	    				c75, result.getString("contact_email"),
 						result.getString("contact_phone"), result.getString("workshop_type_name"),
-						result.getString("location"), result.getString("date"), result.getString("start"), 
-						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"), 
-						result.getString("alternate_end"), result.getString("participants"), areas, 
+						result.getString("location"), result.getString("date"), result.getString("start"),
+						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"),
+						result.getString("alternate_end"), result.getString("participants"), areas,
 						result.getString("how_you_heard"), result.getString("special")};
 	            list.add(array);
 	    }
@@ -354,7 +354,7 @@ public class Database {
 	    return list;
 	  }
 
-  
+
   public int addUser(String username, String password, int permission) {
 
 	String sql = ("INSERT INTO account VALUES ('" + username + "', '" + password + "', '" + permission + "')");
@@ -379,9 +379,9 @@ public class Database {
    try {
      Statement statement = db.createStatement();
      result = statement.executeQuery(sql);
-    
+
      while (result.next()) {
-       String[] array = {result.getString("username"), result.getString("password"), 
+       String[] array = {result.getString("username"), result.getString("password"),
            result.getString("permission_lvl")};
            list.add(array);
      }
@@ -392,4 +392,3 @@ public class Database {
   return list;
  }
 }
-

@@ -42,18 +42,18 @@ public class HeaderPanel extends Panel {
 			signInLink.add(new Label("signText", "Sign In"));
 			add(signInLink);
 		}
-		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
-		homeLink.add(new Label("homeText", "Home"));
-		add(homeLink);
-		final BookmarkablePageLink<Void> submitRequestLink = new BookmarkablePageLink<>("submitRequest", WorkshopRequestPage.class);
-		submitRequestLink.add(new Label("submitRequestText", "Request a Workshop"));
-		add(submitRequestLink);
-		final BookmarkablePageLink<Void> aboutALPs = new BookmarkablePageLink<>("aboutALPs", AboutALPs.class);
-		aboutALPs.add(new Label("aboutALPsText", "About ALPs"));
-		add(aboutALPs);
-		final BookmarkablePageLink<Void> aboutWorkshops = new BookmarkablePageLink<>("aboutWorkshops", AboutWorkshops.class);
-		aboutWorkshops.add(new Label("aboutWorkshopsText", "About Workshops"));
-		add(aboutWorkshops);
+//		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
+//		homeLink.add(new Label("homeText", "Home"));
+//		add(homeLink);
+//		final BookmarkablePageLink<Void> submitRequestLink = new BookmarkablePageLink<>("submitRequest", WorkshopRequestPage.class);
+//		submitRequestLink.add(new Label("submitRequestText", "Request a Workshop"));
+//		add(submitRequestLink);
+//		final BookmarkablePageLink<Void> aboutALPs = new BookmarkablePageLink<>("aboutALPs", AboutALPs.class);
+//		aboutALPs.add(new Label("aboutALPsText", "About ALPs"));
+//		add(aboutALPs);
+//		final BookmarkablePageLink<Void> aboutWorkshops = new BookmarkablePageLink<>("aboutWorkshops", AboutWorkshops.class);
+//		aboutWorkshops.add(new Label("aboutWorkshopsText", "About Workshops"));
+//		add(aboutWorkshops);
 	}
 }
 

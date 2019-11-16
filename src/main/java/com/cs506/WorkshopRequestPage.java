@@ -12,12 +12,8 @@ import com.cs506.templates.WorkshopRequestPanel;
  */
 public class WorkshopRequestPage extends Base {
 
-<<<<<<< Updated upstream
-	public WorkshopRequestPage() {
-=======
 	public WorkshopRequestPage(final PageParameters pageParameters) {
 		super(pageParameters);
->>>>>>> Stashed changes
 		add(new WorkshopRequestPanel("workshopRequestPanel"));
 	}
 
