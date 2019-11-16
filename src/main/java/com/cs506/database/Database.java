@@ -161,7 +161,7 @@ public class Database {
  
 	public int delWorkshop(String name) {
 		
-		Strinf sql = "DELETE FROM workshop WHERE group_name = '" + name + "'";
+		String sql = "DELETE FROM workshop WHERE group_name = '" + name + "'";
 		
 		try {
   			Statement statement = db.createStatement();
