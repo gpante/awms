@@ -213,7 +213,7 @@ public class Database {
 
   		try {
   			Statement statement = db.createStatement();
-  			statement.executeQuery(sql);
+  			statement.executeUpdate(sql);
   		} catch (SQLException e) {
   			System.out.println(e.getMessage());
   		return -1;
