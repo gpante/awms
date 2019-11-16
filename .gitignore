@@ -11,3 +11,4 @@ bin/pom.xml
 .classpath
 .project
 bin
+database.db
