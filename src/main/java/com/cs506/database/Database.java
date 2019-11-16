@@ -159,6 +159,21 @@ public class Database {
   		return list;
   	}
  
+	public int delWorkshop(String name) {
+		
+		String sql = "DELETE FROM workshop WHERE group_name = '" + name + "'";
+		
+		try {
+  			Statement statement = db.createStatement();
+  			statement.executeQuery(sql);
+  		} catch (SQLException e) {
+  			System.out.println(e.getMessage());
+  		return -1;
+
+		}
+      		return 1;
+  	}
+	
   	public int editWorkshop(String name, WorkshopRequest request) {    
   		
 		String date = request.getDate().toString();
@@ -198,10 +213,11 @@ public class Database {
 
   		try {
   			Statement statement = db.createStatement();
-  			statement.executeQuery(sql);
+  			statement.executeUpdate(sql);
   		} catch (SQLException e) {
   			System.out.println(e.getMessage());
   		return -1;
+
 		}
       		return 1;
   	}
