@@ -25,6 +25,7 @@ import com.cs506.SecureSession;
 import com.cs506.SignIn;
 import com.cs506.SignOut;
 import com.cs506.WorkshopEditPage;
+import com.cs506.WorkshopRequestPage;
 import com.cs506.database.Database;
 
 public class HeaderPanel extends Panel {
@@ -38,22 +39,26 @@ public class HeaderPanel extends Panel {
 			final BookmarkablePageLink<Void> signOutLink = new BookmarkablePageLink<>("sign", SignOut.class);
 			signOutLink.add(new Label("signText", "Sign Out"));
 			add(signOutLink);
+
+			final Link<Void> workshopLink = new Link<Void>("workshop") {
+
+				@Override
+				public void onClick() {
+					setResponsePage(new WorkshopEditPage(new Database().getWorkshop("Test")));
+				}
+				
+			};
+			workshopLink.add(new Label("workshopText", "View a Workshop"));
+			add(workshopLink);
 		} else {
 			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("sign", SignIn.class);
 			signInLink.add(new Label("signText", "Sign In"));
 			add(signInLink);
+
+			final BookmarkablePageLink<Void> workshopLink = new BookmarkablePageLink<Void>("workshop", WorkshopRequestPage.class);
+			workshopLink.add(new Label("workshopText", "Request a Workshop"));
+			add(workshopLink);
 		}
-
-		final Link<Void> viewLink = new Link<Void>("view") {
-
-			@Override
-			public void onClick() {
-				setResponsePage(new WorkshopEditPage(new Database().getWorkshop("Test")));
-			}
-			
-		};
-		viewLink.add(new Label("viewText", "View a Workshop"));
-		add(viewLink);
 //		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
 //		homeLink.add(new Label("homeText", "Home"));
 //		add(homeLink);

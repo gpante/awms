@@ -8,12 +8,7 @@ import com.cs506.workshop.WorkshopRequest;
  * Workshop edit page with the form attached.
  * @author AJ
  */
-public class WorkshopEditPage extends Base {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -241045865922862107L;
+public final class WorkshopEditPage extends Base {
 
 	public WorkshopEditPage(final WorkshopRequest request) {
 		add(new WorkshopEditPanel("workshopEditPanel", request));
