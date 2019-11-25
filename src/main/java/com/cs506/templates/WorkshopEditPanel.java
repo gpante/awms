@@ -22,10 +22,13 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.DateValidator;
 import org.apache.wicket.validation.validator.StringValidator;
+
+import com.cs506.WorkshopNotSubmitted;
 import com.cs506.WorkshopRequestSubmitted;
 import com.cs506.database.Database;
 import com.cs506.validator.PhoneNumberValidator;
@@ -38,18 +41,21 @@ import com.cs506.workshop.WorkshopType;
  * 
  * @author AJ
  */
-public class WorkshopRequestPanel extends Panel {
+public class WorkshopEditPanel extends Panel {
+	
+	private final String original;
 
-	public WorkshopRequestPanel(String id) {
+	public WorkshopEditPanel(String id, final WorkshopRequest request) {
 		super(id);
+		this.original = request.getNameOfGroup();
 		add(new FeedbackPanel("feedback"));
-		add(new WorkshopRequestForm("workshopRequestForm"));
+		add(new WorkshopRequestForm("workshopEditForm", request));
 	}
 	
 	public final class WorkshopRequestForm extends Form<WorkshopRequest> {
 
-		public WorkshopRequestForm(String id) {
-			super(id, new CompoundPropertyModel<>(new WorkshopRequest()));
+		public WorkshopRequestForm(String id, final WorkshopRequest request) {
+			super(id, new CompoundPropertyModel<>(request));
 			
 			final TextField<String> nameOfGroup = new TextField<>("nameOfGroup");
 			nameOfGroup.setRequired(true);
@@ -65,7 +71,7 @@ public class WorkshopRequestPanel extends Panel {
             add(nameOfContactFeedback);
             nameOfContactFeedback.add(nameOfContact);
 
-			RadioGroup<Boolean> consist75Group = new RadioGroup<>("consist75", new PropertyModel(getModel(), "consist75"));
+			RadioGroup<Boolean> consist75Group = new RadioGroup<Boolean>("consist75", new PropertyModel<Boolean>(getModel(), "consist75"));
 			consist75Group.setRequired(true);
 			consist75Group.add(new Radio<>("true", new Model<Boolean>(true)));
 			consist75Group.add(new Radio<>("false", new Model<Boolean>(false)));
@@ -85,12 +91,13 @@ public class WorkshopRequestPanel extends Panel {
             add(contactPhoneFeedback);
             contactPhoneFeedback.add(contactPhone);
 
-			RadioGroup<WorkshopType> workshopTypeGroup = new RadioGroup<>("workshopType", new PropertyModel(getModel(), "workshopType"));
+			RadioGroup<WorkshopType> workshopTypeGroup = new RadioGroup<WorkshopType>("workshopType", new PropertyModel<WorkshopType>(getModel(), "workshopType"));
 			workshopTypeGroup.setRequired(true);
 			workshopTypeGroup.add(new Radio<>("high", new Model<WorkshopType>(WorkshopType.HIGH_ROPES_COURSE)));
 			workshopTypeGroup.add(new Radio<>("low", new Model<WorkshopType>(WorkshopType.LOW_ROPES_COURSE)));
 			workshopTypeGroup.add(new Radio<>("ground", new Model<WorkshopType>(WorkshopType.GROUND)));
 			workshopTypeGroup.add(new Radio<>("unsure", new Model<WorkshopType>(WorkshopType.UNSURE)));
+			workshopTypeGroup.setModelObject(request.getWorkshopType());
 			add(workshopTypeGroup);
 			
 			final TextField<String> location = new TextField<>("location");
@@ -142,11 +149,21 @@ public class WorkshopRequestPanel extends Panel {
             participantsFeedback.add(participants);
             
             List<Area> list = Area.getAreas();
+            List<Area> checked = request.getAreas();
             CheckGroup areasGroup = new CheckGroup("areasGroup", new PropertyModel(getModel(), "areas"));
             ListView<Area> areas = new ListView<Area>("areas", list) {
 				@Override
 				protected void populateItem(ListItem<Area> item) {
-					Check<Area> check = new Check<Area>("check", item.getModel());
+					IModel<Area> model = null;
+					for (Area a : checked) {
+						if (item.getModel().getObject().getName().equals(a.getName())) {
+							model = Model.of(a);
+							break;
+						}
+					}
+					if (model == null)
+						model = item.getModel();
+					Check<Area> check = new Check<Area>("check", model);
 					item.add(check);
 					item.add(new Label("name", new PropertyModel(item.getModel(), "name")));
 				}
@@ -179,10 +196,12 @@ public class WorkshopRequestPanel extends Panel {
 			
 			Database db = new Database();
 			try {	
-	    		int resultValue = db.addWorkshop(request);
+	    		int resultValue = db.editWorkshop(original, request);
 	    		if (resultValue > 0) {
 				System.out.println("submitted");
+				setResponsePage(WorkshopRequestSubmitted.class);
 			} else {
+				setResponsePage(WorkshopNotSubmitted.class);
 				System.out.println("submisson failed");
 			}
 	    	}catch(Exception e) {
@@ -193,7 +212,6 @@ public class WorkshopRequestPanel extends Panel {
 	    		System.out.println("db conn closed");
 	    	}
 			
-			setResponsePage(WorkshopRequestSubmitted.class);
 		}
 		
 	}

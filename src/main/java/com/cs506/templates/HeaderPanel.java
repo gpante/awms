@@ -18,15 +18,15 @@ package com.cs506.templates;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.cs506.AboutALPs;
-import com.cs506.AboutWorkshops;
-import com.cs506.HomePage;
 import com.cs506.SecureSession;
 import com.cs506.SignIn;
 import com.cs506.SignOut;
+import com.cs506.WorkshopEditPage;
 import com.cs506.WorkshopRequestPage;
+import com.cs506.database.Database;
 
 public class HeaderPanel extends Panel {
 
@@ -39,10 +39,25 @@ public class HeaderPanel extends Panel {
 			final BookmarkablePageLink<Void> signOutLink = new BookmarkablePageLink<>("sign", SignOut.class);
 			signOutLink.add(new Label("signText", "Sign Out"));
 			add(signOutLink);
+
+			final Link<Void> workshopLink = new Link<Void>("workshop") {
+
+				@Override
+				public void onClick() {
+					setResponsePage(new WorkshopEditPage(new Database().getWorkshop("Test")));
+				}
+				
+			};
+			workshopLink.add(new Label("workshopText", "View a Workshop"));
+			add(workshopLink);
 		} else {
 			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("sign", SignIn.class);
 			signInLink.add(new Label("signText", "Sign In"));
 			add(signInLink);
+
+			final BookmarkablePageLink<Void> workshopLink = new BookmarkablePageLink<Void>("workshop", WorkshopRequestPage.class);
+			workshopLink.add(new Label("workshopText", "Request a Workshop"));
+			add(workshopLink);
 		}
 //		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
 //		homeLink.add(new Label("homeText", "Home"));
