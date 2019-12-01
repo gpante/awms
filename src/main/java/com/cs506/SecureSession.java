@@ -28,6 +28,7 @@ import com.cs506.database.Database;
 public final class SecureSession extends AuthenticatedWebSession
 {
     private User user;
+    private String permission;
 
     public SecureSession(Request request)
     {
@@ -52,6 +53,7 @@ public final class SecureSession extends AuthenticatedWebSession
     	
     	db.closeConn();
     	setUser(new User(username));
+    	setPermission(list.getFirst()[2]);
 		return true;
     	
     }
@@ -63,6 +65,14 @@ public final class SecureSession extends AuthenticatedWebSession
     public void setUser(final User user) {
         this.user = user;
     }
+    
+    public String getPermission() {
+    	return permission;
+    }
+    
+    public void setPermission(String permission) {
+    	this.permission = permission;
+    }
 
     @Override
     public void invalidate() {
@@ -72,7 +82,14 @@ public final class SecureSession extends AuthenticatedWebSession
 
 	@Override
 	public Roles getRoles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Roles resultRoles = new Roles();
+
+        if(isSignedIn())
+                resultRoles.add("SIGNED_IN");
+
+        if(permission.equals("1"))
+                resultRoles.add(Roles.ADMIN);
+
+        return resultRoles;
+	} 
 }

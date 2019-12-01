@@ -26,6 +26,7 @@ import com.cs506.SignIn;
 import com.cs506.SignOut;
 import com.cs506.WorkshopEditPage;
 import com.cs506.WorkshopRequestPage;
+import com.cs506.WorkshopTable;
 import com.cs506.database.Database;
 
 public class HeaderPanel extends Panel {
@@ -46,7 +47,6 @@ public class HeaderPanel extends Panel {
 				public void onClick() {
 					setResponsePage(new WorkshopEditPage(new Database().getWorkshop("Test")));
 				}
-				
 			};
 			workshopLink.add(new Label("workshopText", "View a Workshop"));
 			add(workshopLink);
@@ -59,6 +59,18 @@ public class HeaderPanel extends Panel {
 			workshopLink.add(new Label("workshopText", "Request a Workshop"));
 			add(workshopLink);
 		}
+		
+		final BookmarkablePageLink<Void> workshopTable = new BookmarkablePageLink<>("table", WorkshopTable.class);
+		add(workshopTable);
+		workshopTable.setEnabled(false);
+		workshopTable.setVisible(false);
+		if (((SecureSession)getSession()).getUser() != null) {
+			workshopTable.setEnabled(true);
+			workshopTable.setVisible(true);
+		}
+		
+		
+		
 //		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
 //		homeLink.add(new Label("homeText", "Home"));
 //		add(homeLink);

@@ -69,4 +69,11 @@ public class WicketApplication extends AuthenticatedWebApplication
 		return SignIn.class;
 	}
 	
+	/**
+	 * 
+	 */
+	protected Class<? extends WebPage> getWorkshopTable()
+	{
+		return WorkshopTable.class;
+	}
 }

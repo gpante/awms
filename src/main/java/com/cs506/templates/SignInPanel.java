@@ -72,7 +72,7 @@ public final class SignInPanel extends Panel {
 
 			if (session.signIn(getUsername(), getPassword())) {
 				strategy.remove();
-				// redirect to homepage
+				// redirect to page
 				setResponsePage(getApplication().getHomePage());
 			} else {
 				error(getLocalizer().getString("signInFailed", this, "Invalid username or password"));
