@@ -1,6 +1,5 @@
 package com.cs506;
 
-
 import org.apache.wicket.Session;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.authorization.strategies.page.SimplePageAuthorizationStrategy;
@@ -8,7 +7,6 @@ import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSessio
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.settings.RequestCycleSettings;
-
 import com.cs506.templates.AuthenticatedBase;
 
 

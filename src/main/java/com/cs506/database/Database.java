@@ -32,7 +32,8 @@ public class Database {
         statement.execute("CREATE TABLE IF NOT EXISTS account ("
                           + "username TEXT PRIMARY KEY, "
                           + "password TEXT NOT NULL, "
-                          + "permission_lvl INTEGER DEFAULT 0)");
+                          + "permission_lvl INTEGER DEFAULT 0, "
+                          + "name TEXT NOT NULL)");
         statement.execute("CREATE TABLE IF NOT EXISTS workshop ("
                           + "workshop_type_name TEXT, "
                           + "group_name TEXT NOT NULL UNIQUE, "
@@ -136,7 +137,7 @@ public class Database {
       System.out.println(e.getMessage());
       return -1;
     }
-      return 1;
+    return 1;
   }
 
 
@@ -191,10 +192,10 @@ public class Database {
   			statement.executeQuery(sql);
   		} catch (SQLException e) {
   			System.out.println(e.getMessage());
-  		return -1;
+  			return -1;
 
 		}
-      		return 1;
+      	return 1;
   	}
 
   	public int editWorkshop(String name, WorkshopRequest request) {
@@ -239,10 +240,10 @@ public class Database {
   			statement.executeUpdate(sql);
   		} catch (SQLException e) {
   			System.out.println(e.getMessage());
-  		return -1;
+  			return -1;
 
 		}
-      		return 1;
+      	return 1;
   	}
 
 
@@ -254,9 +255,7 @@ public class Database {
 
 	    try {
 	    	Statement statement = db.createStatement();
-	    	System.out.println("executing");
 	    	result = statement.executeQuery(sql);
-	    	System.out.println("results");
 
 	    	while (result.next()) {
 	    		String c75;
@@ -335,7 +334,6 @@ public class Database {
 	    			}
 	    			areaInt -= 0x1;
 	    		}
-	    		System.out.println("areaInt = " + areaInt);
 
 	    		String[] array = {result.getString("group_name"), result.getString("contact_name"),
 	    				c75, result.getString("contact_email"),
@@ -355,40 +353,95 @@ public class Database {
 	  }
 
 
-  public int addUser(String username, String password, int permission) {
+  public int addUser(String username, String password, int permission, String name) {
 
-	String sql = ("INSERT INTO account VALUES ('" + username + "', '" + password + "', '" + permission + "')");
+	String sql = ("INSERT INTO account VALUES ('" + username + "', '" + password + "', '" + permission + "', '" + name + "')");
 
     try {
       Statement statement = db.createStatement();
       statement.execute(sql);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
-    return -1;
+      return -1;
     }
-      return 1;
+    return 1;
   }
 
 
- public LinkedList<String[]> getUser(String username, String password) {
+    public LinkedList<String[]> getUser(String username, String password) {
 
-   LinkedList<String[]> list = new LinkedList<String[]>();
-   String sql = ("SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'");
-   ResultSet result = null;
+    	LinkedList<String[]> list = new LinkedList<String[]>();
+    	String sql = ("SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'");
+    	ResultSet result = null;
 
-   try {
-     Statement statement = db.createStatement();
-     result = statement.executeQuery(sql);
+    	try {
+    		Statement statement = db.createStatement();
+    		result = statement.executeQuery(sql);
 
-     while (result.next()) {
-       String[] array = {result.getString("username"), result.getString("password"),
-           result.getString("permission_lvl")};
-           list.add(array);
-     }
-   } catch (SQLException e) {
-     System.out.println(e.getMessage());
-   }
+    		while (result.next()) {
+    			String[] array = {result.getString("username"), result.getString("password"),
+    					result.getString("permission_lvl"), result.getString("name")}; 
+    			list.add(array);
+    		}
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
 
-  return list;
- }
+    	return list;
+    }
+    
+    
+    public int assignFacilitator(String username, String group_name) {
+    	
+    	String sql = ("INSERT INTO signed_up VALUES ('" + username + "', '" + group_name + "') ");
+    	
+    	try {
+    		Statement statement = db.createStatement();
+    		statement.executeQuery(sql);
+    		
+    	} catch(SQLException e) {
+    		System.out.println(e.getMessage());
+    		return -1;
+    	}
+    	return 1;
+    }
+    
+    public int removeFacilitator(String username, String group_name) {
+    	
+    	String sql = ("DELETE FROM signed_up WHERE username = '" + username + "' AND group_name = '" + group_name + "'");
+    	
+    	try {
+    		Statement statement = db.createStatement();
+    		statement.executeQuery(sql);
+    		
+    	} catch(SQLException e) {
+    		System.out.println(e.getMessage());
+    		return -1;
+    	}
+    	return 1;
+    }
+    
+    public LinkedList<String[]> getFacilitators(String group_name) {
+    	
+    	LinkedList<String[]> facilitators = new LinkedList<String[]>();
+    	String sql = ("SELECT * FROM signed_up WHERE group_name = '" + group_name + "'");
+    	ResultSet result = null;
+    	
+    	try {
+    		Statement stmt = db.createStatement();
+    		result = stmt.executeQuery(sql);
+    		
+    		while(result.next()) {
+    			String[] array = {result.getString("username"), result.getString("group_name")};
+    			facilitators.add(array);
+    		}
+    		
+    	} catch(SQLException e) {
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
+    	return facilitators;
+    }
+    
 }

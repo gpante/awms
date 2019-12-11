@@ -181,10 +181,10 @@ public class WorkshopRequestPanel extends Panel {
 			try {	
 	    		int resultValue = db.addWorkshop(request);
 	    		if (resultValue > 0) {
-				System.out.println("submitted");
-			} else {
-				System.out.println("submisson failed");
-			}
+	    			System.out.println("submitted");
+	    		} else {
+	    			System.out.println("submisson failed");
+	    		}
 	    	}catch(Exception e) {
 	    		System.out.print(e);
 	    		System.out.println("error");

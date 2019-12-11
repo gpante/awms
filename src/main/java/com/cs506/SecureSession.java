@@ -17,17 +17,17 @@
 package com.cs506;
 
 import java.util.LinkedList;
-
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
-
 import com.cs506.database.Database;
 
 
 public final class SecureSession extends AuthenticatedWebSession
 {
-    private User user;
+
+	private static final long serialVersionUID = 1L;
+	private User user;
     private String permission;
 
     public SecureSession(Request request)
@@ -44,7 +44,6 @@ public final class SecureSession extends AuthenticatedWebSession
     	LinkedList<String[]> list = null;
     	try {	
     		list = db.getUser(username, password);
-    		System.out.println(list.getFirst()[0] + list.getFirst()[1] + list.getFirst()[2]);
     	}catch(Exception e) {
     		System.out.print(e);
     		db.closeConn();
@@ -84,11 +83,15 @@ public final class SecureSession extends AuthenticatedWebSession
 	public Roles getRoles() {
 		Roles resultRoles = new Roles();
 
-        if(isSignedIn())
-                resultRoles.add("SIGNED_IN");
-
-        if(permission.equals("1"))
-                resultRoles.add(Roles.ADMIN);
+        if(isSignedIn()) {
+        	resultRoles.add("SIGNED_IN");
+        }
+        if(permission.equals("1")) {
+        	resultRoles.add("LEAD_CHALLENGE_COURSE_INSTRUCTOR");
+        }
+        if(permission.equals("2")) {
+        	resultRoles.add(Roles.ADMIN);
+        }
 
         return resultRoles;
 	} 
