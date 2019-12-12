@@ -106,6 +106,18 @@
       		<version>3.27.2.1</version>
     	</dependency>
 
+		<!-- jquery ui -->
+		<dependency>
+    		<groupId>com.googlecode.wicket-jquery-ui</groupId>
+    		<artifactId>wicket-jquery-ui</artifactId>
+    		<version>8.0.0</version>
+		</dependency> 
+		<dependency>
+			<groupId>com.googlecode.wicket-jquery-ui</groupId>
+			<artifactId>wicket-jquery-ui-theme-uilightness</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		
 		<!-- uncomment if WebSocket support is needed
 		<dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>

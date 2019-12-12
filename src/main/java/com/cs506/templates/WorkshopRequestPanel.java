@@ -31,6 +31,7 @@ import com.cs506.validator.PhoneNumberValidator;
 import com.cs506.workshop.Area;
 import com.cs506.workshop.WorkshopRequest;
 import com.cs506.workshop.WorkshopType;
+import com.googlecode.wicket.jquery.ui.form.datepicker.DatePicker;
 
 /**
  * Panel for a workshop request.
@@ -98,10 +99,11 @@ public class WorkshopRequestPanel extends Panel {
             final MarkupContainer locationFeedback = new FormComponentFeedbackBorder("locationFeedback");
             add(locationFeedback);
             locationFeedback.add(location);
-			
-			final DateTextField date = new DateTextField("date");
+            
+            final DatePicker date = new DatePicker("date");
+			//final DateTextField date = new DateTextField("date");
 			date.setRequired(true);
-			date.add(DateValidator.range(Date.valueOf("2000-01-01"), Date.valueOf("3000-01-01")));
+			date.add(DateValidator.range(Date.valueOf("2019-01-01"), Date.valueOf("3000-01-01")));
             final MarkupContainer dateFeedback = new FormComponentFeedbackBorder("dateFeedback");
             add(dateFeedback);
             dateFeedback.add(date);
@@ -116,9 +118,10 @@ public class WorkshopRequestPanel extends Panel {
             add(endTimeFeedback);
             endTimeFeedback.add(endTime);
 			
-			final DateTextField alternateDate = new DateTextField("alternateDate");
+            final DatePicker alternateDate = new DatePicker("alternateDate");
+			//final DateTextField alternateDate = new DateTextField("alternateDate");
 			alternateDate.setRequired(true);
-			alternateDate.add(DateValidator.range(Date.valueOf("2000-01-01"), Date.valueOf("3000-01-01")));
+			alternateDate.add(DateValidator.range(Date.valueOf("2019-01-01"), Date.valueOf("3000-01-01")));
             final MarkupContainer alternateDateFeedback = new FormComponentFeedbackBorder("alternateDateFeedback");
             add(alternateDateFeedback);
             alternateDateFeedback.add(alternateDate);
