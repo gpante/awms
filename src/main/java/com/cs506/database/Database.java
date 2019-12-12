@@ -338,8 +338,8 @@ public class Database {
 	    		String[] array = {result.getString("group_name"), result.getString("contact_name"),
 	    				c75, result.getString("contact_email"),
 						result.getString("contact_phone"), result.getString("workshop_type_name"),
-						result.getString("location"), result.getString("date"), result.getString("start"),
-						result.getString("end"), result.getString("alternate_date"), result.getString("alternate_start"),
+						result.getString("location"), result.getString("date").replace("00:00:00 CST", "").replace("00:00:00 CDT", ""), result.getString("start"),
+						result.getString("end"), result.getString("alternate_date").replace("00:00:00 CST", "").replace("00:00:00 CDT", ""), result.getString("alternate_start"),
 						result.getString("alternate_end"), result.getString("participants"), areas,
 						result.getString("how_you_heard"), result.getString("special")};
 	            list.add(array);

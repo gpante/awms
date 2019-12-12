@@ -12,7 +12,8 @@ public class PhoneNumberValidator extends PatternValidator {
     private static final long serialVersionUID = 1L;
 
     public PhoneNumberValidator() {
-        super(Pattern.compile("[0-9\\+\\-\\(\\)\\s]*"));
+    	//"[0-9\\+\\-\\(\\)\\s]*"
+        super(Pattern.compile("(^\\(?[0-9]{3}\\)?[\\-\\.\\s]?([0-9]{3})?[\\-\\.\\s]?([0-9]{4})$)|(^\\+(?:\\d[\\-\\.\\s]?){6,14}[0-9]$)"));
     }
 
 }

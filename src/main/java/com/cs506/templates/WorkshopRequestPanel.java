@@ -2,7 +2,6 @@ package com.cs506.templates;
 
 import java.sql.Date;
 import java.util.List;
-
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.markup.html.form.datetime.TimeField;
@@ -94,7 +93,7 @@ public class WorkshopRequestPanel extends Panel {
 			add(workshopTypeGroup);
 			
 			final TextField<String> location = new TextField<>("location");
-			location.setRequired(true);
+			location.setRequired(false);
 			location.add(new StringValidator(1, 50));
             final MarkupContainer locationFeedback = new FormComponentFeedbackBorder("locationFeedback");
             add(locationFeedback);
@@ -184,6 +183,15 @@ public class WorkshopRequestPanel extends Panel {
 	    			System.out.println("submitted");
 	    		} else {
 	    			System.out.println("submisson failed");
+	    			String groupName = request.getNameOfGroup();
+	    			int num = 2;
+	    			while(resultValue < 0) {
+	    				String newName = groupName.concat("(" + num + ")");
+	    				request.setNameOfGroup(newName);
+	    				resultValue = db.addWorkshop(request);
+	    				num+=1;
+	    			}
+	    			System.out.println("Resubmitted");
 	    		}
 	    	}catch(Exception e) {
 	    		System.out.print(e);

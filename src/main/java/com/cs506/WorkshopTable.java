@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import org.apache.wicket.Session;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableMultiLineLabel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -71,7 +73,8 @@ public class WorkshopTable extends Base {
                     item.add(new Label("participants", new PropertyModel<String>(model, "13")));
                     item.add(new Label("areas", new PropertyModel<String>(model, "14")));
                     item.add(new Label("howHeard", new PropertyModel<String>(model, "15")));
-                    item.add(new Label("special", new PropertyModel<String>(model, "16")));
+                    //item.add(new Label("special", new PropertyModel<String>(model, "16")));
+                    item.add(new AjaxEditableLabel("special", new PropertyModel(model, "16")));
                     
                     LinkedList<String[]> list = db.getFacilitators(model[0]);
                     ListIterator<String[]> iter = list.listIterator(0);
