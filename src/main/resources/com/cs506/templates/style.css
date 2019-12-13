@@ -80,7 +80,7 @@
 	font-style: normal;
 }
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, label, legend, table, caption, tbody, tfoot, thead, tr, th, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -997,7 +997,6 @@ sub,
 sup,
 table,
 tbody,
-td,
 tfoot,
 th,
 thead,
@@ -1041,7 +1040,6 @@ li,
 ol,
 p,
 pre,
-td,
 th,
 ul {
 	margin: 0;
@@ -1401,12 +1399,16 @@ table.dataview {
     font-size: 1em;
     font-family: arial;
     }
+
+td {
+  padding-top: 20px;
+}
     
 table.dataview caption { text-align: left; }
 table.dataview tr { padding-top: 2px; padding-bottom: 2px; }
 table.dataview tr.even { background-color: #ffebcd; }
 table.dataview tr.odd { background-color: #fff; }
-table.dataview tr td { padding-left: 8px; padding-right: 30px; }
+table.dataview tr td { padding-left: 8px; padding-right: 30px; padding-bottom: 30px; }
 table.dataview tr th { color: black; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 30px; background-color: #c1e4ff; border-bottom: 1px solid #0079d6; border-top: 1px solid #0079d6; text-align: left; white-space: nowrap; vertical-align: middle;}
 
 table.dataview tr th { background-position: right; background-repeat:no-repeat; }
@@ -1671,6 +1673,17 @@ screen and (min-width:40em) {
 	.uw-header-container {
 		max-width: 75rem
 	}
+}
+
+.navbar {
+	position: relative;
+  background-color: #C4050C;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  font-weight: 400;
+	text-transform: uppercase;
 }
 
 input.lcheckbox {
