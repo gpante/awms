@@ -1,10 +1,11 @@
 package com.cs506.templates;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.sql.Date;
 import java.util.List;
 
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.markup.html.form.datetime.TimeField;
 import org.apache.wicket.extensions.validation.validator.RfcCompliantEmailAddressValidator;
 import org.apache.wicket.markup.html.basic.Label;
@@ -26,12 +27,19 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.DateValidator;
 import org.apache.wicket.validation.validator.StringValidator;
+
 import com.cs506.WorkshopRequestSubmitted;
+import com.cs506.calendar.CalendarAPI;
 import com.cs506.database.Database;
 import com.cs506.validator.PhoneNumberValidator;
 import com.cs506.workshop.Area;
 import com.cs506.workshop.WorkshopRequest;
 import com.cs506.workshop.WorkshopType;
+<<<<<<< Updated upstream
+=======
+import com.google.api.services.calendar.Calendar;
+import com.googlecode.wicket.jquery.ui.form.datepicker.DatePicker;
+>>>>>>> Stashed changes
 
 /**
  * Panel for a workshop request.
@@ -176,6 +184,16 @@ public class WorkshopRequestPanel extends Panel {
 		public final void onSubmit() {
 			WorkshopRequest request = getModelObject();
 			System.out.println(request);
+			
+			try {
+				Calendar calendar = CalendarAPI.getCalendar();
+				CalendarAPI.createEvent(calendar, request);
+			} catch (GeneralSecurityException | IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			if (request != null)
+				return;
 			
 			Database db = new Database();
 			try {	

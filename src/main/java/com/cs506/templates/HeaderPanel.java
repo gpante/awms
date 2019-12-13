@@ -16,26 +16,50 @@
  */
 package com.cs506.templates;
 
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 
+import com.cs506.AboutALPs;
+import com.cs506.AboutWorkshops;
+import com.cs506.HomePage;
 import com.cs506.SecureSession;
 import com.cs506.SignIn;
 import com.cs506.SignOut;
-import com.cs506.WorkshopEditPage;
+import com.cs506.WorkshopCalendarPage;
 import com.cs506.WorkshopRequestPage;
+<<<<<<< Updated upstream
 import com.cs506.database.Database;
+=======
+import com.cs506.WorkshopTable;
+
+import de.agilecoders.wicket.core.Bootstrap;
+import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
+import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarButton;
+import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents;
+>>>>>>> Stashed changes
 
 public class HeaderPanel extends Panel {
 
 	public HeaderPanel(String id) {
 		super(id);
 
-		setRenderBodyOnly(true);
+		//setRenderBodyOnly(true);
+
+		Bootstrap.install(getApplication());
+		Navbar navbar = new Navbar("navbar");
+		navbar.setInverted(true);
+		//navbar.fluid();
+		navbar.setBrandName(null);
+		    
+		navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
+				new NavbarButton<HomePage>(HomePage.class, Model.of("Home")),
+				new NavbarButton<WorkshopRequestPage>(WorkshopRequestPage.class, Model.of("Request a Workshop")),
+				new NavbarButton<AboutWorkshops>(AboutWorkshops.class, Model.of("Workshops")),
+				new NavbarButton<AboutALPs>(AboutALPs.class, Model.of("About Us")),
+				new NavbarButton<WorkshopCalendarPage>(WorkshopCalendarPage.class, Model.of("Calendar"))));
 		
 		if (((SecureSession)getSession()).getUser() != null && !this.getClass().equals(SignOut.class)) {
+<<<<<<< Updated upstream
 			final BookmarkablePageLink<Void> signOutLink = new BookmarkablePageLink<>("sign", SignOut.class);
 			signOutLink.add(new Label("signText", "Sign Out"));
 			add(signOutLink);
@@ -50,15 +74,15 @@ public class HeaderPanel extends Panel {
 			};
 			workshopLink.add(new Label("workshopText", "View a Workshop"));
 			add(workshopLink);
+=======
+			navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT, 
+					new NavbarButton<SignOut>(SignOut.class, Model.of("Sign Out"))));
+>>>>>>> Stashed changes
 		} else {
-			final BookmarkablePageLink<Void> signInLink = new BookmarkablePageLink<>("sign", SignIn.class);
-			signInLink.add(new Label("signText", "Sign In"));
-			add(signInLink);
-
-			final BookmarkablePageLink<Void> workshopLink = new BookmarkablePageLink<Void>("workshop", WorkshopRequestPage.class);
-			workshopLink.add(new Label("workshopText", "Request a Workshop"));
-			add(workshopLink);
+			navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT, 
+					new NavbarButton<SignOut>(SignIn.class, Model.of("Sign In"))));
 		}
+<<<<<<< Updated upstream
 //		final BookmarkablePageLink<Void> homeLink = new BookmarkablePageLink<>("home", HomePage.class);
 //		homeLink.add(new Label("homeText", "Home"));
 //		add(homeLink);
@@ -71,6 +95,19 @@ public class HeaderPanel extends Panel {
 //		final BookmarkablePageLink<Void> aboutWorkshops = new BookmarkablePageLink<>("aboutWorkshops", AboutWorkshops.class);
 //		aboutWorkshops.add(new Label("aboutWorkshopsText", "About Workshops"));
 //		add(aboutWorkshops);
+=======
+		
+		NavbarButton<WorkshopTable> table = new NavbarButton<WorkshopTable>(WorkshopTable.class, Model.of("Workshop table"));
+		table.setEnabled(false);
+		table.setVisible(false);
+		if (((SecureSession)getSession()).getUser() != null) {
+			table.setEnabled(true);
+			table.setVisible(true);
+		}
+		navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT, 
+				table));
+		add(navbar);
+>>>>>>> Stashed changes
 	}
 }
 
