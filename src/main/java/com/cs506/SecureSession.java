@@ -17,82 +17,84 @@
 package com.cs506;
 
 import java.util.LinkedList;
+
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
+
 import com.cs506.database.Database;
 
-
-public final class SecureSession extends AuthenticatedWebSession
-{
+public final class SecureSession extends AuthenticatedWebSession {
 
 	private static final long serialVersionUID = 1L;
 	private User user;
-    private String permission;
+	private String permission;
 
-    public SecureSession(Request request)
-    {
-        super(request);
-    }
+	public SecureSession(Request request) {
+		super(request);
+	}
 
-    @Override
-    public final boolean authenticate(final String username, final String password) {
-    	
-    	
-    	Database db = new Database();
-    	
-    	LinkedList<String[]> list = null;
-    	try {	
-    		list = db.getUser(username, password);
-    	}catch(Exception e) {
-    		System.out.print(e);
-    		db.closeConn();
-    		return false;
-    	}
-    	
-    	db.closeConn();
-    	setUser(new User(username));
-    	setPermission(list.getFirst()[2]);
+	@Override
+	public final boolean authenticate(final String username, final String password) {
+
+		try {
+			Database db = new Database();
+
+			LinkedList<String[]> list = null;
+			try {
+				list = db.getUser(username, password);
+			} catch (Exception e) {
+				System.out.print(e);
+				db.closeConn();
+				return false;
+			}
+
+			db.closeConn();
+			setUser(new User(username));
+			setPermission(list.getFirst()[2]);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 		return true;
-    	
-    }
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(final User user) {
-        this.user = user;
-    }
-    
-    public String getPermission() {
-    	return permission;
-    }
-    
-    public void setPermission(String permission) {
-    	this.permission = permission;
-    }
+	public void setUser(final User user) {
+		this.user = user;
+	}
 
-    @Override
-    public void invalidate() {
-        super.invalidate();
-        user = null;
-    }
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		user = null;
+	}
 
 	@Override
 	public Roles getRoles() {
 		Roles resultRoles = new Roles();
 
-        if(isSignedIn()) {
-        	resultRoles.add("SIGNED_IN");
-        }
-        if(permission.equals("1")) {
-        	resultRoles.add("LEAD_CHALLENGE_COURSE_INSTRUCTOR");
-        }
-        if(permission.equals("2")) {
-        	resultRoles.add(Roles.ADMIN);
-        }
+		if (isSignedIn()) {
+			resultRoles.add("SIGNED_IN");
+		}
+		if (permission.equals("1")) {
+			resultRoles.add("LEAD_CHALLENGE_COURSE_INSTRUCTOR");
+		}
+		if (permission.equals("2")) {
+			resultRoles.add(Roles.ADMIN);
+		}
 
-        return resultRoles;
-	} 
+		return resultRoles;
+	}
 }
