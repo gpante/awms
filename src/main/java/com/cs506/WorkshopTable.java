@@ -2,19 +2,27 @@ package com.cs506;
 
 import java.util.LinkedList;
 
+<<<<<<< Updated upstream
+=======
+import org.apache.wicket.Session;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
+>>>>>>> Stashed changes
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+<<<<<<< Updated upstream
+=======
+import org.apache.wicket.util.io.IClusterable;
+>>>>>>> Stashed changes
 
 import com.cs506.database.Database;
-import com.cs506.templates.Base;
+import com.cs506.templates.AuthenticatedBase;
 
 
-public class WorkshopTable extends Base {
-	private static final long serialVersionUID = 1L;
+public class WorkshopTable extends AuthenticatedBase implements IClusterable {
 
 	public WorkshopTable(final PageParameters parameters) {
 		super();

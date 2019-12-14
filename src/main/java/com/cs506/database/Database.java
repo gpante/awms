@@ -13,13 +13,16 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.Locale;
 
+import org.apache.wicket.util.io.IClusterable;
+
 import com.cs506.workshop.Area;
 import com.cs506.workshop.WorkshopRequest;
 import com.cs506.workshop.WorkshopType;
 
-public class Database {
+public final class Database implements IClusterable {
 
-  Connection db = null;
+	
+  private static Connection db = null;
 
   public static final SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("us"));
 
