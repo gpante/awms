@@ -15,19 +15,26 @@ import org.apache.wicket.util.io.IClusterable;
 
 import com.cs506.database.Database;
 import com.cs506.templates.AuthenticatedBase;
+import com.cs506.workshop.WorkshopRequest;
 
 
 public final class WorkshopTable extends AuthenticatedBase implements IClusterable {
+	
+	private boolean finished = false;
+	private int count = 0;
 
 	public WorkshopTable(final PageParameters parameters) {
 		super();
 		
 		Database db = new Database();
 		
+		this.finished = false;
+		this.count = 0;
+		
 		try {
 			
 			LinkedList<String[]> workshops = db.getAllWorkshops();
-			
+
 			add(new ListView<String[]>("workshops", workshops) {
 
 				@Override
@@ -40,7 +47,11 @@ public final class WorkshopTable extends AuthenticatedBase implements IClusterab
 
             				@Override
             				public void onClick() {
-            					setResponsePage(new WorkshopEditPage(db.getWorkshop(item.getModel().getObject()[0])));
+        						Database db = new Database();
+            					WorkshopRequest request = db.getWorkshop(item.getModel().getObject()[0]);
+            					db.closeConn();
+            					WorkshopEditPage edit = new WorkshopEditPage(request);
+            					setResponsePage(edit);
             				}
         				
         			};
@@ -82,16 +93,33 @@ public final class WorkshopTable extends AuthenticatedBase implements IClusterab
                     while(iter.hasNext()) {
                     	String[] temp = (String[])iter.next();
                     	facilitators = facilitators.concat(temp[0] + "\n");
-                    	System.out.println(facilitators);
                     }
-                    System.out.println(facilitators);
                     item.add(new Label("facilitator", facilitators));
+                    count++;
+                    if (count >= workshops.size())
+                    	finished = true;
                 }
 			});
+    		new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					while(!finished) {
+						try {
+							Thread.sleep(100L);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					db.closeConn();
+				}
+    			
+    		}).start();
 		} catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
+	        System.out.println("Error: Closing");
+			db.closeConn();
 		}
-		
-		//db.closeConn();
+
 	}
 }

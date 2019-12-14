@@ -29,7 +29,7 @@ public final class Database implements IClusterable {
   public Database() {
 
     try {
-        this.db = DriverManager.getConnection("jdbc:sqlite:database.db");
+        db = DriverManager.getConnection("jdbc:sqlite:database.db");
         Statement statement = db.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS account ("
                           + "username TEXT PRIMARY KEY, "
@@ -84,7 +84,7 @@ public final class Database implements IClusterable {
 	  try {
 		  if(db != null) {
 			  db.close();
-			  System.out.println("connection closed");
+			  System.out.println("Connection closed");
 		  }
 	  } catch(SQLException e) {
 		  System.out.println(e.getMessage());
@@ -151,6 +151,7 @@ public final class Database implements IClusterable {
   		try {
   			Statement statement = db.createStatement();
   			result = statement.executeQuery(sql);
+  			
 
   			while (result.next()) {
   				String c75;
@@ -180,7 +181,7 @@ public final class Database implements IClusterable {
   				return request;
   			}
   		} catch (SQLException | ParseException e) {
-  			System.out.println(e.getMessage());
+  			e.printStackTrace();
   		}
   		return null;
   	}

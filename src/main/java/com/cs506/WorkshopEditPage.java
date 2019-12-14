@@ -13,7 +13,8 @@ import com.cs506.workshop.WorkshopRequest;
 public final class WorkshopEditPage extends AuthenticatedBase implements IClusterable {
 
 	public WorkshopEditPage(final WorkshopRequest request) {
-		add(new WorkshopEditPanel("workshopEditPanel", request));
+		WorkshopEditPanel panel = new WorkshopEditPanel("workshopEditPanel", request);
+		add(panel);
 	}
 
 }
